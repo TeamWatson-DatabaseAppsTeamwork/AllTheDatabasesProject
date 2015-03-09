@@ -9,7 +9,7 @@ namespace ProductsSystem.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationsEnabled = true;
         }
 
         public static void InitializeDatabase(DbContext context)
@@ -20,9 +20,9 @@ namespace ProductsSystem.Data.Migrations
 
         protected override void Seed(ProductsSystemDbContext context)
         {
-            AddVendors(context);
-            AddMaasures(context);
-            AddProducts(context);
+            this.AddVendors(context);
+            this.AddMeasures(context);
+            this.AddProducts(context);
         }
 
         private void AddVendors(ProductsSystemDbContext db)
@@ -31,38 +31,36 @@ namespace ProductsSystem.Data.Migrations
                 new Vendor { Name = "Nestle Sofia Corp." },
                 new Vendor { Name = "Zagorka Corp." },
                 new Vendor { Name = "Targovishte Bottling Company Ltd." },
-                new Vendor { Name = "Ivena Comers-GD"},
-                new Vendor { Name = "Daris Honey Trading"},
-                new Vendor { Name = "Max Medica"},
-                new Vendor { Name = "Frut Corect"},
-                new Vendor { Name = "Vantea"},
-                new Vendor { Name = "Sams97"},
-                new Vendor { Name = "RelexEp"},
-                new Vendor { Name = "Avis"},
-                new Vendor { Name = "AquaTrade"},
-                new Vendor { Name = "Elixir"},
-                new Vendor { Name = "E-bakalia"},
-                new Vendor { Name = "Radex"},
-                new Vendor { Name = "Dovex"},
-                new Vendor { Name = "VSDrinks"},
-                new Vendor { Name = "Toby Ltd."},
-                new Vendor { Name = "Brevis"},
-                new Vendor { Name = "Seva Ltd."}
-            );
+                new Vendor { Name = "Ivena Comers-GD" },
+                new Vendor { Name = "Daris Honey Trading" },
+                new Vendor { Name = "Max Medica" },
+                new Vendor { Name = "Frut Corect" },
+                new Vendor { Name = "Vantea" },
+                new Vendor { Name = "Sams97" },
+                new Vendor { Name = "RelexEp" },
+                new Vendor { Name = "Avis" },
+                new Vendor { Name = "AquaTrade" },
+                new Vendor { Name = "Elixir" },
+                new Vendor { Name = "E-bakalia" },
+                new Vendor { Name = "Radex" },
+                new Vendor { Name = "Dovex" },
+                new Vendor { Name = "VSDrinks" },
+                new Vendor { Name = "Toby Ltd." },
+                new Vendor { Name = "Brevis" },
+                new Vendor { Name = "Seva Ltd." });
 
-            ((DbContext) db).SaveChanges();
+            ((DbContext)db).SaveChanges();
         }
 
-        private void AddMaasures(ProductsSystemDbContext db)
+        private void AddMeasures(ProductsSystemDbContext db)
         {
             db.Measures.AddOrUpdate(
                 new Measure { Name = "liter" },
                 new Measure { Name = "gram" },
                 new Measure { Name = "kilogram" },
-                new Measure { Name = "milliliter" }
-            );
+                new Measure { Name = "milliliter" });
 
-            ((DbContext) db).SaveChanges();
+            ((DbContext)db).SaveChanges();
         }
 
         private void AddProducts(ProductsSystemDbContext db)
@@ -95,10 +93,9 @@ namespace ProductsSystem.Data.Migrations
                     Price = (decimal)2.80,
                     VendorId = 1,
                     MeasureId = 2
-                }
-            );
+                });
 
-            ((DbContext) db).SaveChanges();
+            ((DbContext)db).SaveChanges();
         }
     }
 }

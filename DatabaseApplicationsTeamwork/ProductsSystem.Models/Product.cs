@@ -2,22 +2,11 @@
 {
     public class Product
     {
-        private string name;
-        private decimal price;
-
         public int Id { get; set; }
 
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
+        public string Name { get; set; }
 
-        public decimal Price
-        {
-            get { return this.price; }
-            set { this.price = value; }
-        }
+        public decimal Price { get; set; }
 
         public int VendorId { get; set; }
 

@@ -2,16 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Repositories;
     using ProductsSystem.Models;
 
     public class ProductsSystemData : IProductsSystemData
     {
+        private static ProductsSystemData dataInstance;
         private IProductsSystemDbContext context;
         private IDictionary<Type, object> repositories;
-        private static ProductsSystemData dataInstance;
 
         protected ProductsSystemData(IProductsSystemDbContext context)
         {
@@ -34,11 +33,6 @@
             get { return this.GetRepository<Measure>(); }
         }
 
-        public int SaveChanges()
-        {
-            return this.context.SaveChanges();
-        }
-
         public static ProductsSystemData GetInstance(IProductsSystemDbContext context)
         {
             if (dataInstance == null)
@@ -49,15 +43,20 @@
             return dataInstance;
         }
 
+        public int SaveChanges()
+        {
+            return this.context.SaveChanges();
+        }
+
         private IRepository<T> GetRepository<T>() where T : class
         {
-            var type = typeof (T);
+            var type = typeof(T);
             if (!this.repositories.ContainsKey(type))
             {
-                var repositoryType = typeof (Repository<T>);
+                var repositoryType = typeof(Repository<T>);
                 if (!typeof(T).IsAssignableFrom(repositoryType))
                 {
-                    repositoryType = typeof (ProductsRepository);
+                    repositoryType = typeof(ProductsRepository);
                 }
 
                 this.repositories.Add(type, Activator.CreateInstance(repositoryType, this.context));

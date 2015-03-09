@@ -1,6 +1,6 @@
 ﻿namespace PDFExporter
 {
-    using ProductsSystem.Data;
+    using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
     using ProductsSystem.Data.Migrations;
     using ProductsSystem.Models;
@@ -14,7 +14,7 @@
             // Execute the following method if do not have the
             // database in sql server
             // It will add sample data automatically
-            // Configuration.InitializeDatabase(context);
+            Configuration.InitializeDatabase(context);
 
             var data = ProductsSystemData.GetInstance(context);
 

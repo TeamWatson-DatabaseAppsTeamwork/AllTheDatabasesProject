@@ -1,12 +1,14 @@
-﻿namespace ProductsSystem.Data
+﻿namespace ProductsSystem.Data.Contexts
 {
     using System.Data.Entity;
-    using ProductsSystem.Data.Contexts;
     using ProductsSystem.Models;
 
     public class ProductsSystemDbContext : DbContext, IProductsSystemDbContext
     {
-        public ProductsSystemDbContext() : base("ProductsSystem") { }
+        public ProductsSystemDbContext()
+            : base("ProductsSystem")
+        { 
+        }
 
         public IDbSet<Product> Products { get; set; }
 
@@ -19,7 +21,7 @@
             return base.Set<T>();
         }
 
-        public int SaveChanges()
+        public new int SaveChanges()
         {
             return base.SaveChanges();
         }

@@ -2,6 +2,7 @@
 {
     using ProductsSystem.Data;
     using ProductsSystem.Data.Data;
+    using ProductsSystem.Data.Migrations;
     using ProductsSystem.Models;
 
     public class EntryPoint

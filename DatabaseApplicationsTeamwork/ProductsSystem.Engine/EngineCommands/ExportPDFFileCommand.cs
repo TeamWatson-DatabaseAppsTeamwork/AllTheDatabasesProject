@@ -8,9 +8,9 @@
 
     public class ExportPDFFileCommand : IEngineCommand
     {
-        private PDFExporter exportExecutor;
+        private PDFSalesExporter exportExecutor;
 
-        public ExportPDFFileCommand(IList<object> arguments, PDFExporter exportExecutor)
+        public ExportPDFFileCommand(IList<object> arguments, PDFSalesExporter exportExecutor)
         {
             this.Arguments = arguments;
             this.exportExecutor = exportExecutor;
@@ -37,24 +37,24 @@
                     DateTime.ParseExact("20-07-2014", "dd-mm-yyyy", CultureInfo.InvariantCulture),
                     new List<object>
                     {
-                        new {Product = "Beer “Zagorka”", Quantity = 11, Measure = "liters", UnitPrice = 1.00, Location = "Supermarket “Bourgas – Plaza”"},
-                        new {Product = "Beer “Zagorka”", Quantity = 78, Measure = "liters", UnitPrice = 0.92, Location = "Supermarket “Kaspichan – Center”"}
+                        new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
+                        new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
                     }
                 },
                 {
                     DateTime.ParseExact("21-07-2014", "dd-mm-yyyy", CultureInfo.InvariantCulture),
                     new List<object>
                     {
-                        new {Product = "Beer “Beck’s”", Quantity = 40, Measure = "liters", UnitPrice = 1.20, Location = "Supermarket “Kaspichan – Center”"},
-                        new {Product = "Beer “Zagorka”", Quantity = 37, Measure = "liters", UnitPrice = 1.00, Location = "Supermarket “Bourgas – Plaza”"}
+                        new {Product = "Beer “Beck’s”", Quantity = "40 litets", UnitPrice = 1.20m, Location = "Supermarket “Kaspichan – Center”", Sum = 50.00},
+                        new {Product = "Beer “Zagorka”", Quantity = "37 litets", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 58.00}
                     }
                 },
                 {
                     DateTime.ParseExact("22-07-2014", "dd-mm-yyyy", CultureInfo.InvariantCulture),
                     new List<object>
                     {
-                        new {Product = "Beer “Zagorka”", Quantity = 16.00, Measure = "liters", UnitPrice = 1.00, Location = "Supermarket “Bourgas – Plaza”"},
-                        new {Product = "Beer “Zagorka”", Quantity = 90.00, Measure = "liters", UnitPrice = 0.92, Location = "Supermarket “Kaspichan – Center”"}
+                        new {Product = "Beer “Zagorka”", Quantity = "16 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 65.00},
+                        new {Product = "Beer “Zagorka”", Quantity = "90 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 70.00}
                     }
                 },
             };

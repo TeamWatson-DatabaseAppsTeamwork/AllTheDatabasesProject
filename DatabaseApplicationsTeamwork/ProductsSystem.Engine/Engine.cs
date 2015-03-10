@@ -38,7 +38,7 @@
                     break;
                 }
 
-                var pdfExecutor = new PDFExporter();
+                var pdfExecutor = new PDFSalesExporter();
                 var command = new ExportPDFFileCommand(new [] {"", ""}, pdfExecutor);
                 command.Execute(this.data);
             }

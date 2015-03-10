@@ -6,6 +6,8 @@
 
         string FileName { get; }
 
+        int ColumnsNumber { get; set; }
+
         void Export();
 
         void SetDefaultFileFolder(string fileFolderPath);

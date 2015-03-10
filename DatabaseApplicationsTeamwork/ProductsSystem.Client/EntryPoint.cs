@@ -1,6 +1,5 @@
 ﻿namespace ProductsSystem.Client
 {
-    using System;
     using System.Globalization;
     using System.Threading;
     using ProductsSystem.Data.Contexts;

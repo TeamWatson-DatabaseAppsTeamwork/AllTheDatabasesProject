@@ -1,7 +1,9 @@
 ﻿namespace ProductsSystem.Engine
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using ProductsSystem.Data.Data;
-    using PDFExporter;
     using ProductsSystem.Engine.EngineCommands;
 
     public class Engine
@@ -9,11 +11,13 @@
         private static Engine instance;
         private readonly IUserInterface userInterface;
         private IProductsSystemData data;
+        private IDictionary<Type, IEngineCommand> commands; 
 
         private Engine(IUserInterface userInterface, IProductsSystemData data)
         {
             this.userInterface = userInterface;
             this.data = data;
+            this.commands = new Dictionary<Type, IEngineCommand>();
         }
 
         public static Engine GetInstance(IUserInterface userInterface, IProductsSystemData data)
@@ -32,22 +36,52 @@
             {
                 string userInputAsString = this.userInterface.Read();
                 var userInput = this.ParseCommand(userInputAsString);
-
-                if (userInput.Command == EngineConstants.Exit)
-                {
-                    break;
-                }
-
-                var pdfExecutor = new PDFSalesExporter();
-                var command = new ExportPDFFileCommand(new [] {"", ""}, pdfExecutor);
-                command.Execute(this.data);
+                string command = userInput[0];
+                string[] commandArguments = userInput.Skip(1).ToArray();
+                this.InvokeCommand(command, commandArguments);
             }
         }
 
-        private UserInput ParseCommand(string userInputAsString)
+        private string[] ParseCommand(string userInputAsString)
         {
-            var userInput = new UserInput();
+            var userInput = userInputAsString.Split(
+                new string[]{EngineConstants.UserInputSplitSymbol}, StringSplitOptions.RemoveEmptyEntries);
             return userInput;
+        }
+
+        private void InvokeCommand(string command, string[] arguments)
+        {
+            var currentCommand = this.GetCurrentCommand(command);
+            currentCommand.RecieveArguments(arguments);
+            currentCommand.Execute(this.data);
+        }
+
+        private IEngineCommand GetCurrentCommand(string command)
+        {
+            Type commandType = typeof(object);
+            IEngineCommand currentCommand;
+
+            switch (command)
+            {
+                case EngineConstants.ExportPDFFile:
+                    commandType = typeof (ExportPDFFileCommand);
+                    break;
+                case EngineConstants.ExportXMLFile:
+                    commandType = typeof(ExportXMLFileCommand); break;
+            }
+
+            currentCommand = this.PullCommand(commandType);
+            return currentCommand;
+        }
+
+        private IEngineCommand PullCommand(Type commandType)
+        {
+            if (!this.commands.ContainsKey(commandType))
+            {
+                this.commands.Add(commandType, CommandFactory.CreateCommand(commandType));
+            }
+
+            return this.commands[commandType];
         }
     }
 }

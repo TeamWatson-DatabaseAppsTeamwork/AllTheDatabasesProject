@@ -44,9 +44,7 @@
 
         public void Export()
         {
-            Console.WriteLine(Element.ALIGN_RIGHT);
             var filePath = this.FileFolderPath + "\\" + String.Format(this.FileName, "", "");
-
             var pdfDocument = new Document(PageSize.A4);
             var output = new FileStream(filePath, FileMode.Create);
             var pdfWriter = PdfWriter.GetInstance(pdfDocument, output);
@@ -69,7 +67,7 @@
             this.FileName = fileName;
         }
 
-        // Test implementation of the method
+        // TODO improve this method - currently test implementation
         private void PopulateDataTable(ref Document pdfDocument)
         {
             var dataTable = new PdfPTable(this.ColumnsNumber);
@@ -86,9 +84,7 @@
                 dateCell.BackgroundColor = new BaseColor(242, 242, 242);
                 dataTable.AddCell(dateCell);
                 var cellsHeadings = this.CreateTableRow(DefaultCellsHeadings, 1, new BaseColor(217, 217, 217));
-
                 dataTable.Rows.Add(cellsHeadings);
-
                 foreach (var sale in date.Sales)
                 {
                     var row = this.CreateTableRow(sale, 1);
@@ -108,7 +104,6 @@
             var paragraph = new Paragraph(text, font);
             paragraph.Alignment = alignment;
             cell.AddElement(paragraph);
-
             return cell;
         }
 

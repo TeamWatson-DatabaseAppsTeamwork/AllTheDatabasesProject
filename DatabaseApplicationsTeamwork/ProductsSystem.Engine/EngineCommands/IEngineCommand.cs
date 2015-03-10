@@ -1,12 +1,14 @@
 ﻿namespace ProductsSystem.Engine.EngineCommands
 {
-    using System.Collections.Generic;
+    using System.Collections;
     using ProductsSystem.Data.Data;
 
     public interface IEngineCommand
     {
-        IList<object> Arguments { get; }
+        IList Arguments { get; }
 
         string Execute(IProductsSystemData data);
+
+        void RecieveArguments(string[] rawArguments);
     }
 }

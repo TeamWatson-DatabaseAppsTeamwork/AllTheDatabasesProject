@@ -1,6 +1,7 @@
 ﻿namespace ProductsSystem.Engine.EngineCommands
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
     using PDFExporter.PDFAggregatedSalesExporter;
@@ -9,34 +10,64 @@
 
     public class ExportPDFFileCommand : IEngineCommand
     {
-        private PDFSalesExporter exportExecutor;
+        private PDFSalesExporter pdfExporter;
 
-        public ExportPDFFileCommand(IList<object> arguments, PDFSalesExporter exportExecutor)
+        public ExportPDFFileCommand(PDFSalesExporter pdfExporter)
         {
-            this.Arguments = arguments;
-            this.exportExecutor = exportExecutor;
+            this.pdfExporter = pdfExporter;
+            this.Arguments = new List<DateTime>();
         }
 
-        public IList<object> Arguments { get; private set; }
+        public IList Arguments { get; private set; }
 
+        /// <summary>
+        /// Generate a pdf report with the data retrieved
+        /// </summary>
+        /// <param name="data">Data source</param>
+        /// <returns>Message for successful document generation</returns>
+        /// <exception cref="InvalidOperationException">
+        /// Throws exeption when no command arguments are available
+        /// to process the command</exception>
         public string Execute(IProductsSystemData data)
         {
-            var aggregatedSalesData = this.RetrieveAggregateSalesInformation(data, "", "");
-            exportExecutor.Data = aggregatedSalesData;
-            exportExecutor.Export();
+            if (this.Arguments.Count > 0)
+            {
+                var aggregatedSalesData = this.RetrieveAggregateSalesInformation(data, "", "");
+                pdfExporter.Data = aggregatedSalesData;
+                pdfExporter.Export();
+                this.Arguments.Clear();
+                // TODO Successful pdf generation message
+                return "";
+            }
 
-            return "";
+            throw new InvalidOperationException(EngineConstants.MissingCommandArgumentsMessage);
         }
 
-        // Test implementation of the method
+        /// <summary>
+        /// Revieves users search parameters - start date and end date as string array
+        /// Parses the dates using specified date format and stores them
+        /// </summary>
+        /// <param name="rawArguments">
+        /// String array holding users search parameters for retrieving sales data</param>
+        public void RecieveArguments(string[] rawArguments)
+        {
+            var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+            this.Arguments.Add(startDate);
+            this.Arguments.Add(endDate);
+        }
+
         private IList<SalesForDate> RetrieveAggregateSalesInformation(
             IProductsSystemData data, string startDate, string endDate)
         {
+            // TODO query to retrive data from the data repository
+            // Currently implemented with test data
+
             var aggregatedSalesData = new List<SalesForDate>
             {
                 new SalesForDate
                 {
-                    Date = DateTime.ParseExact("20-07-2014", "dd-MM-yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
                     {
                         new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
@@ -46,7 +77,7 @@
                 },
                 new SalesForDate
                 {
-                    Date = DateTime.ParseExact("20-07-2014", "dd-MM-yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
                     {
                         new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
@@ -56,7 +87,7 @@
                 },
                 new SalesForDate
                 {
-                    Date = DateTime.ParseExact("20-07-2014", "dd-MM-yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
                     {
                         new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},

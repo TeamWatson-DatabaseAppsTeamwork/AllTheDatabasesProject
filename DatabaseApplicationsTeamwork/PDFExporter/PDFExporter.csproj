@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IPDFExporter.cs" />
     <Compile Include="PDFAggregatedSalesExporter\PDFSalesExporter.cs" />
+    <Compile Include="PDFAggregatedSalesExporter\SalesForDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

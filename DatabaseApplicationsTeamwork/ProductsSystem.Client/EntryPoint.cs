@@ -1,5 +1,8 @@
 ﻿namespace ProductsSystem.Client
 {
+    using System;
+    using System.Globalization;
+    using System.Threading;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
     using ProductsSystem.Engine;
@@ -14,6 +17,7 @@
             // database in sql server
             // It will add sample data automatically
             // Configuration.InitializeDatabase(context);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var data = ProductsSystemData.GetInstance(context);
             var userInterface = new ConsoleUserInterface();
             var engine = Engine.GetInstance(userInterface, data);

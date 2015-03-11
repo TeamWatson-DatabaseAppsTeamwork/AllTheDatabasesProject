@@ -1,4 +1,4 @@
-﻿namespace PDFExporter
+﻿namespace PdfExporter
 {
     public interface IPdfExporter
     {

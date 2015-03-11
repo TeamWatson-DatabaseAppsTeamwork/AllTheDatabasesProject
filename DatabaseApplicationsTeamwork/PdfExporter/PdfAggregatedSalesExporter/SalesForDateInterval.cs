@@ -1,4 +1,4 @@
-﻿namespace PDFExporter.PDFAggregatedSalesExporter
+﻿namespace PdfExporter.PdfAggregatedSalesExporter
 {
     using System;
     using System.Collections.Generic;

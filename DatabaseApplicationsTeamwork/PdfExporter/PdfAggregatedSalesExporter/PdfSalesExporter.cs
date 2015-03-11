@@ -1,13 +1,13 @@
-﻿namespace PDFExporter
+﻿namespace PdfExporter
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
-    using PDFExporter.PDFAggregatedSalesExporter;
+    using PdfExporter.PdfAggregatedSalesExporter;
 
-    public class PDFSalesExporter : IPdfExporter
+    public class PdfSalesExporter : IPdfExporter
     {
         private const string Heading = "Aggregated Sales Report";
         private const string DefaultFileName = "Aggregated-Sales-Report.pdf";
@@ -23,7 +23,7 @@
 
         private IList<SalesForDateInterval> data;
 
-        public PDFSalesExporter()
+        public PdfSalesExporter()
         {
             this.FileFolderPath = DefaultFileFolderPath;
             this.FileName = DefaultFileName;

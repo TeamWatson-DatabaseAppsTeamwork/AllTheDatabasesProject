@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPDFExporter.cs" />
-    <Compile Include="PDFAggregatedSalesExporter\PDFSalesExporter.cs" />
-    <Compile Include="PDFAggregatedSalesExporter\SalesForDateInterval.cs" />
+    <Compile Include="IPdfExporter.cs" />
+    <Compile Include="PdfAggregatedSalesExporter\PdfSalesExporter.cs" />
+    <Compile Include="PdfAggregatedSalesExporter\SalesForDateInterval.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

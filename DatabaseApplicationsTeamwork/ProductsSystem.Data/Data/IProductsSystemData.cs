@@ -11,6 +11,10 @@
 
         IRepository<Measure> Measures { get; }
 
+        IRepository<Supermarket> Supermarkets { get; }
+
+        IRepository<Sale> Sales { get; } 
+
         int SaveChanges();
     }
 }

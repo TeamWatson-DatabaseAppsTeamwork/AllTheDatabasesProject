@@ -33,6 +33,16 @@
             get { return this.GetRepository<Measure>(); }
         }
 
+        public IRepository<Supermarket> Supermarkets
+        {
+            get { return this.GetRepository<Supermarket>(); }
+        }
+
+        public IRepository<Sale> Sales
+        {
+            get { return this.GetRepository<Sale>(); }
+        }
+
         public static ProductsSystemData GetInstance(IProductsSystemDbContext context)
         {
             if (dataInstance == null)

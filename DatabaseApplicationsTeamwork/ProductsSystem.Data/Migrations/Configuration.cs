@@ -23,6 +23,7 @@ namespace ProductsSystem.Data.Migrations
             this.AddVendors(context);
             this.AddMeasures(context);
             this.AddProducts(context);
+            this.AddSupermarkets(context);
         }
 
         private void AddVendors(ProductsSystemDbContext db)
@@ -94,6 +95,19 @@ namespace ProductsSystem.Data.Migrations
                     VendorId = 1,
                     MeasureId = 2
                 });
+
+            ((DbContext)db).SaveChanges();
+        }
+
+        private void AddSupermarkets(ProductsSystemDbContext db)
+        {
+            db.Supermarkets.AddOrUpdate
+            (
+              new Supermarket
+              {
+                  Location = ""
+              }  
+            );
 
             ((DbContext)db).SaveChanges();
         }

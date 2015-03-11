@@ -1,5 +1,7 @@
 ﻿namespace ProductsSystem.Models
 {
+    using System.Collections.Generic;
+
     public class Product
     {
         public int Id { get; set; }
@@ -15,5 +17,7 @@
         public int MeasureId { get; set; }
 
         public Measure Measure { get; set; }
+
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }

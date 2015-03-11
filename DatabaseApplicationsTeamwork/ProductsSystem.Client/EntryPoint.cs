@@ -18,12 +18,13 @@
             // Firstly ensure that in the App.config file
             // you have the name of your sql server in the
             // connection string
-            Configuration.InitializeDatabase(context);
+            // Configuration.InitializeDatabase(context);
+
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            //var data = ProductsSystemData.GetInstance(context);
-            //var userInterface = new ConsoleUserInterface();
-            //var engine = Engine.GetInstance(userInterface, data);
-            //engine.Run();
+            var data = ProductsSystemData.GetInstance(context);
+            var userInterface = new ConsoleUserInterface();
+            var engine = Engine.GetInstance(userInterface, data);
+            engine.Run();
         }
     }
 }

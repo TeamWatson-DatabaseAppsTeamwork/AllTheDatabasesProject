@@ -16,11 +16,10 @@
         public const string MissingCommandArgumentsMessage =
             "Arguments required for the command execution currently missing";
 
-        public const string InvalidOperationMessage =
-            "Invalid attempt to execute a command. Possible reason could be missing search arguments. Please try again.";
-
         public const string InvalidInputFormatMessage =
             "Please ensure that you are using the correct fomat for the input data.";
+
+        public const string InvalidCommandMessage = "Invalid commnd. Please try again.";
 
         public const string InvalidInputMessage =
             "Please ensure you have entered non-empty command";

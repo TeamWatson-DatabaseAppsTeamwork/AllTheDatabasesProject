@@ -10,6 +10,7 @@
 
     public class ExportPdfFileCommand : IEngineCommand
     {
+        private const int CommandArgumentsCount = 3;
         private PdfSalesExporter pdfExporter;
 
         public ExportPdfFileCommand(PdfSalesExporter pdfExporter)
@@ -30,7 +31,7 @@
         /// to process the command</exception>
         public string Execute(IProductsSystemData data)
         {
-            if (this.Arguments.Count > 0)
+            if (this.Arguments.Count == CommandArgumentsCount)
             {
                 var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
                     data, (DateTime)Arguments[0], (DateTime)Arguments[1]);

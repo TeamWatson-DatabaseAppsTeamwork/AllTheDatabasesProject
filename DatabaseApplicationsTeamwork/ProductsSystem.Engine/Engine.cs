@@ -48,9 +48,9 @@
                     string[] commandArguments = userInput.Skip(1).ToArray();
                     this.InvokeCommand(command, commandArguments);
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException operationException)
                 {
-                    this.output = EngineConstants.InvalidOperationMessage;
+                    this.output = operationException.Message;
                     this.ShowOutputToUser();
                 }
                 catch (FormatException)
@@ -99,6 +99,8 @@
                 case EngineConstants.ExportXmlFile:
                     commandType = typeof(ExportXmlFileCommand);
                     break;
+                default:
+                    throw new InvalidOperationException(EngineConstants.InvalidCommandMessage);
             }
 
             currentCommand = this.PullCommand(commandType);

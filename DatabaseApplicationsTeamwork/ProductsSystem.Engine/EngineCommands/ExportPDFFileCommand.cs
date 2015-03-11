@@ -38,7 +38,7 @@
                 pdfExporter.Export();
                 this.Arguments.Clear();
 
-                return EngineConstants.PDFReportSuccessfullyExportedMessage;
+                return EngineConstants.PdfReportSuccessfullyExportedMessage;
             }
 
             throw new InvalidOperationException(EngineConstants.MissingCommandArgumentsMessage);

@@ -7,7 +7,7 @@
     using iTextSharp.text.pdf;
     using PDFExporter.PDFAggregatedSalesExporter;
 
-    public class PDFSalesExporter : IPDFExporter
+    public class PDFSalesExporter : IPdfExporter
     {
         private const string Heading = "Aggregated Sales Report";
         private const string DefaultFileName = "Aggregated-Sales-Report.pdf";

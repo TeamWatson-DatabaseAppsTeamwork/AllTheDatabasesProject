@@ -1,6 +1,6 @@
 ﻿namespace PDFExporter
 {
-    public interface IPDFExporter
+    public interface IPdfExporter
     {
         string FileFolderPath { get; }
 

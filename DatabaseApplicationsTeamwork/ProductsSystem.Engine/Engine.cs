@@ -93,11 +93,12 @@
 
             switch (command)
             {
-                case EngineConstants.ExportPDFFile:
-                    commandType = typeof (ExportPDFFileCommand);
+                case EngineConstants.ExportPdfFile:
+                    commandType = typeof(ExportPDFFileCommand);
                     break;
-                case EngineConstants.ExportXMLFile:
-                    commandType = typeof(ExportXMLFileCommand); break;
+                case EngineConstants.ExportXmlFile:
+                    commandType = typeof(ExportXMLFileCommand);
+                    break;
             }
 
             currentCommand = this.PullCommand(commandType);

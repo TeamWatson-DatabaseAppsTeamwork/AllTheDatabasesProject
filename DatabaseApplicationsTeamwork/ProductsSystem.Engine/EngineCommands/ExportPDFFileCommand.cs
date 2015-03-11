@@ -4,15 +4,15 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
-    using PDFExporter.PDFAggregatedSalesExporter;
+    using PdfExporter.PdfAggregatedSalesExporter;
     using ProductsSystem.Data.Data;
-    using PDFExporter;
+    using PdfExporter;
 
     public class ExportPDFFileCommand : IEngineCommand
     {
-        private PDFSalesExporter pdfExporter;
+        private PdfSalesExporter pdfExporter;
 
-        public ExportPDFFileCommand(PDFSalesExporter pdfExporter)
+        public ExportPDFFileCommand(PdfSalesExporter pdfExporter)
         {
             this.pdfExporter = pdfExporter;
             this.Arguments = new DateTime[2];

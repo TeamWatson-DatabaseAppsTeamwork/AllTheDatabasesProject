@@ -1,7 +1,7 @@
 ﻿namespace ProductsSystem.Engine.EngineCommands
 {
     using System;
-    using PDFExporter;
+    using PdfExporter;
 
     public static class CommandFactory
     {
@@ -19,7 +19,7 @@
 
         private static ExportPDFFileCommand CreateExportPDFFileCommand()
         {
-            var pdfExporter = new PDFSalesExporter();
+            var pdfExporter = new PdfSalesExporter();
             var createExportPdfFileCommand = new ExportPDFFileCommand(pdfExporter);
             return createExportPdfFileCommand;
         }

@@ -94,10 +94,10 @@
             switch (command)
             {
                 case EngineConstants.ExportPdfFile:
-                    commandType = typeof(ExportPDFFileCommand);
+                    commandType = typeof(ExportPdfFileCommand);
                     break;
                 case EngineConstants.ExportXmlFile:
-                    commandType = typeof(ExportXMLFileCommand);
+                    commandType = typeof(ExportXmlFileCommand);
                     break;
             }
 

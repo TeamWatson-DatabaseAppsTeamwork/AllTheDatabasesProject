@@ -7,7 +7,7 @@
     {
         public static IEngineCommand CreateCommand(Type type)
         {
-            if (type == typeof(ExportPDFFileCommand))
+            if (type == typeof(ExportPdfFileCommand))
             {
                 return CreateExportPDFFileCommand();
             }
@@ -17,16 +17,16 @@
             //}
         }
 
-        private static ExportPDFFileCommand CreateExportPDFFileCommand()
+        private static ExportPdfFileCommand CreateExportPDFFileCommand()
         {
             var pdfExporter = new PdfSalesExporter();
-            var createExportPdfFileCommand = new ExportPDFFileCommand(pdfExporter);
+            var createExportPdfFileCommand = new ExportPdfFileCommand(pdfExporter);
             return createExportPdfFileCommand;
         }
 
-        private static ExportXMLFileCommand CreateExportXMLFileCommand()
+        private static ExportXmlFileCommand CreateExportXMLFileCommand()
         {
-            var exportXMLFileCommand = new ExportXMLFileCommand();
+            var exportXMLFileCommand = new ExportXmlFileCommand();
             return exportXMLFileCommand;
         }
     }

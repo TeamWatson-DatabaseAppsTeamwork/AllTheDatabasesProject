@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ExportXMLFileCommand : IEngineCommand
+    public class ExportXmlFileCommand : IEngineCommand
     {
 
         public System.Collections.IList Arguments

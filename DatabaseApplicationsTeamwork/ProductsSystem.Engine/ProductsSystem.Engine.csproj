@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EngineCommands\CommandFactory.cs" />
-    <Compile Include="EngineCommands\ExportPDFFileCommand.cs" />
-    <Compile Include="EngineCommands\ExportXMLFileCommand.cs" />
+    <Compile Include="EngineCommands\ExportPdfFileCommand.cs" />
+    <Compile Include="EngineCommands\ExportXmlFileCommand.cs" />
     <Compile Include="EngineCommands\IEngineCommand.cs" />
     <Compile Include="UserInterface\ConsoleUserInterface.cs" />
     <Compile Include="Engine.cs" />

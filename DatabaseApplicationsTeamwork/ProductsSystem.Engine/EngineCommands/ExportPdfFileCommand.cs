@@ -8,11 +8,11 @@
     using ProductsSystem.Data.Data;
     using PdfExporter;
 
-    public class ExportPDFFileCommand : IEngineCommand
+    public class ExportPdfFileCommand : IEngineCommand
     {
         private PdfSalesExporter pdfExporter;
 
-        public ExportPDFFileCommand(PdfSalesExporter pdfExporter)
+        public ExportPdfFileCommand(PdfSalesExporter pdfExporter)
         {
             this.pdfExporter = pdfExporter;
             this.Arguments = new DateTime[2];
@@ -71,8 +71,8 @@
                     Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
                     {
-                        new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
-                        new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
+                        new { Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m },
+                        new { Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00 }
                     },
                     TotaSum = 850
                 },

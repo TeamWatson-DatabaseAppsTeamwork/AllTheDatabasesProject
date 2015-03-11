@@ -40,6 +40,11 @@
                     string userInputAsString = this.userInterface.Read();
                     var userInput = this.ParseCommand(userInputAsString);
                     string command = userInput[0];
+                    if (command == EngineConstants.Exit)
+                    {
+                        break;
+                    }
+
                     string[] commandArguments = userInput.Skip(1).ToArray();
                     this.InvokeCommand(command, commandArguments);
                 }

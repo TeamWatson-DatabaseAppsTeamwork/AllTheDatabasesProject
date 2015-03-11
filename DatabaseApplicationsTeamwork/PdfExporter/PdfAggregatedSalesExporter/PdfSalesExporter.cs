@@ -14,18 +14,18 @@
         private const int DefaultColumnsNumber = 5;
         private const string DefaultTotalRowHeading = "Total sum for {0}:";
         private const string DefaultDateFormat = "dd-MMM-yyyy";
-        private readonly float[] TableDefaultColumnWidths = new[] {2f, 1f, 1f, 3f, 1f};
-        private readonly string DefaultFileFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        private readonly Font DefaultHeadingFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-        private readonly Font DefaultAggregatedRowFont = new Font(Font.FontFamily.HELVETICA, 10);
-        private readonly Font DefaultCellFont = new Font(Font.FontFamily.HELVETICA, 9);
-        private readonly string[] DefaultCellsHeadings = new[] {"Product", "Quantity", "Unit Price", "Location", "Sum"};
+        private readonly float[] tableDefaultColumnWidths = new[] {2f, 1f, 1f, 3f, 1f};
+        private readonly string defaultFileFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private readonly Font defaultHeadingFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+        private readonly Font defaultAggregatedRowFont = new Font(Font.FontFamily.HELVETICA, 10);
+        private readonly Font defaultCellFont = new Font(Font.FontFamily.HELVETICA, 9);
+        private readonly string[] defaultCellsHeadings = new[] {"Product", "Quantity", "Unit Price", "Location", "Sum"};
 
         private IList<SalesForDateInterval> data;
 
         public PdfSalesExporter()
         {
-            this.FileFolderPath = DefaultFileFolderPath;
+            this.FileFolderPath = this.defaultFileFolderPath;
             this.FileName = DefaultFileName;
             this.ColumnsNumber = DefaultColumnsNumber;
         }
@@ -73,17 +73,17 @@
             var dataTable = new PdfPTable(this.ColumnsNumber);
             dataTable.DefaultCell.Border = 0;
             dataTable.WidthPercentage = 90;
-            var tableHeading = this.CreateCell(DefaultHeadingFont, DefaultColumnsNumber, 1, Heading);
+            var tableHeading = this.CreateCell(this.defaultHeadingFont, DefaultColumnsNumber, 1, Heading);
             dataTable.AddCell(tableHeading);
-            dataTable.SetWidths(TableDefaultColumnWidths);
+            dataTable.SetWidths(this.tableDefaultColumnWidths);
 
             foreach (var date in this.Data)
             {
                 var dateCell = this.CreateCell(
-                    DefaultAggregatedRowFont, DefaultColumnsNumber, 0, date.Date.ToString(DefaultDateFormat));
+                    this.defaultAggregatedRowFont, DefaultColumnsNumber, 0, date.Date.ToString(DefaultDateFormat));
                 dateCell.BackgroundColor = new BaseColor(242, 242, 242);
                 dataTable.AddCell(dateCell);
-                var cellsHeadings = this.CreateTableRow(DefaultCellsHeadings, 1, new BaseColor(217, 217, 217));
+                var cellsHeadings = this.CreateTableRow(this.defaultCellsHeadings, 1, new BaseColor(217, 217, 217));
                 dataTable.Rows.Add(cellsHeadings);
                 foreach (var sale in date.Sales)
                 {
@@ -120,7 +120,7 @@
 
             foreach (var property in rowData.GetType().GetProperties())
             {
-                var cell = this.CreateCell(DefaultCellFont, 1, cellsAlignment, property.GetValue(rowData, null).ToString());
+                var cell = this.CreateCell(this.defaultCellFont, 1, cellsAlignment, property.GetValue(rowData, null).ToString());
                 cells.Add(cell);
             }
 
@@ -145,7 +145,7 @@
 
             foreach (var cellData in rowData)
             {
-                var cell = this.CreateCell(DefaultCellFont, 1, cellsAlignment, cellData.ToString());
+                var cell = this.CreateCell(this.defaultCellFont, 1, cellsAlignment, cellData.ToString());
                 cells.Add(cell);
             }
 
@@ -167,10 +167,10 @@
         private void CreateTotalRow(DateTime date, decimal totalSum, ref PdfPTable dataTable)
         {
             var totalRowHeading = this.CreateCell(
-                DefaultAggregatedRowFont, 4, 2,
+                this.defaultAggregatedRowFont, 4, 2,
                     string.Format(DefaultTotalRowHeading, date.ToString(DefaultDateFormat)));
             var totalRowValue = this.CreateCell(
-                DefaultAggregatedRowFont, 1, 2,
+                this.defaultAggregatedRowFont, 1, 2,
                     totalSum.ToString());
             dataTable.AddCell(totalRowHeading);
             dataTable.AddCell(totalRowValue);

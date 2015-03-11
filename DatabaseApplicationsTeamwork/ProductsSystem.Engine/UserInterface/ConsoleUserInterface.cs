@@ -6,17 +6,15 @@
     {
         public string Input { get; private set; }
 
-        public string Output { get; private set; }
-
         public string Read()
         {
             string userInput = Console.ReadLine();
             return userInput;
         }
 
-        public void Write()
+        public void Write(string output)
         {
-            Console.WriteLine(this.Output);
+            Console.WriteLine(output);
         }
     }
 }

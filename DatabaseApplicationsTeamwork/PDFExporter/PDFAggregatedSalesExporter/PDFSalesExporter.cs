@@ -10,7 +10,7 @@
     public class PDFSalesExporter : IPDFExporter
     {
         private const string Heading = "Aggregated Sales Report";
-        private const string DefaultFileName = "Aggregated-Sales-Report-From{0}-to{1}.pdf";
+        private const string DefaultFileName = "Aggregated-Sales-Report.pdf";
         private const int DefaultColumnsNumber = 5;
         private const string DefaultTotalRowHeading = "Total sum for {0}:";
         private const string DefaultDateFormat = "dd-MMM-yyyy";
@@ -21,7 +21,7 @@
         private readonly Font DefaultCellFont = new Font(Font.FontFamily.HELVETICA, 9);
         private readonly string[] DefaultCellsHeadings = new[] {"Product", "Quantity", "Unit Price", "Location", "Sum"};
 
-        private IList<SalesForDate> data;
+        private IList<SalesForDateInterval> data;
 
         public PDFSalesExporter()
         {
@@ -36,7 +36,7 @@
 
         public int ColumnsNumber { get; set; }
 
-        public IList<SalesForDate> Data
+        public IList<SalesForDateInterval> Data
         {
             get { return this.data; }
             set { this.data = value; }
@@ -44,7 +44,7 @@
 
         public void Export()
         {
-            var filePath = this.FileFolderPath + "\\" + String.Format(this.FileName, "", "");
+            var filePath = this.FileFolderPath + "\\" + this.FileName;
             var pdfDocument = new Document(PageSize.A4);
             var output = new FileStream(filePath, FileMode.Create);
             var pdfWriter = PdfWriter.GetInstance(pdfDocument, output);

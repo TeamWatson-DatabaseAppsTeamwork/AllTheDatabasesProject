@@ -15,7 +15,7 @@
         public ExportPDFFileCommand(PDFSalesExporter pdfExporter)
         {
             this.pdfExporter = pdfExporter;
-            this.Arguments = new List<DateTime>();
+            this.Arguments = new DateTime[2];
         }
 
         public IList Arguments { get; private set; }
@@ -32,12 +32,13 @@
         {
             if (this.Arguments.Count > 0)
             {
-                var aggregatedSalesData = this.RetrieveAggregateSalesInformation(data, "", "");
+                var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
+                    data, (DateTime)Arguments[0], (DateTime)Arguments[1]);
                 pdfExporter.Data = aggregatedSalesData;
                 pdfExporter.Export();
                 this.Arguments.Clear();
-                // TODO Successful pdf generation message
-                return "";
+
+                return EngineConstants.PDFReportSuccessfullyExportedMessage;
             }
 
             throw new InvalidOperationException(EngineConstants.MissingCommandArgumentsMessage);
@@ -53,19 +54,19 @@
         {
             var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
             var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
-            this.Arguments.Add(startDate);
-            this.Arguments.Add(endDate);
+            this.Arguments[0] = startDate;
+            this.Arguments[1] = endDate;
         }
 
-        private IList<SalesForDate> RetrieveAggregateSalesInformation(
-            IProductsSystemData data, string startDate, string endDate)
+        private IList<SalesForDateInterval> RetrieveAggregateSalesInformation(
+            IProductsSystemData data, DateTime startDate, DateTime endDate)
         {
             // TODO query to retrive data from the data repository
             // Currently implemented with test data
 
-            var aggregatedSalesData = new List<SalesForDate>
+            var aggregatedSalesData = new List<SalesForDateInterval>
             {
-                new SalesForDate
+                new SalesForDateInterval
                 {
                     Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
@@ -75,7 +76,7 @@
                     },
                     TotaSum = 850
                 },
-                new SalesForDate
+                new SalesForDateInterval
                 {
                     Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>
@@ -85,7 +86,7 @@
                     },
                     TotaSum = 850
                 },
-                new SalesForDate
+                new SalesForDateInterval
                 {
                     Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
                     Sales = new List<object>

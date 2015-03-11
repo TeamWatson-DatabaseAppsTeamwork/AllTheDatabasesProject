@@ -11,7 +11,8 @@
         private static Engine instance;
         private readonly IUserInterface userInterface;
         private IProductsSystemData data;
-        private IDictionary<Type, IEngineCommand> commands; 
+        private IDictionary<Type, IEngineCommand> commands;
+        private string output;
 
         private Engine(IUserInterface userInterface, IProductsSystemData data)
         {
@@ -34,26 +35,50 @@
         {
             while (true)
             {
-                string userInputAsString = this.userInterface.Read();
-                var userInput = this.ParseCommand(userInputAsString);
-                string command = userInput[0];
-                string[] commandArguments = userInput.Skip(1).ToArray();
-                this.InvokeCommand(command, commandArguments);
+                try
+                {
+                    string userInputAsString = this.userInterface.Read();
+                    var userInput = this.ParseCommand(userInputAsString);
+                    string command = userInput[0];
+                    string[] commandArguments = userInput.Skip(1).ToArray();
+                    this.InvokeCommand(command, commandArguments);
+                }
+                catch (InvalidOperationException)
+                {
+                    this.output = EngineConstants.InvalidOperationMessage;
+                    this.ShowOutputToUser();
+                }
+                catch (FormatException)
+                {
+                    this.output = EngineConstants.InvalidInputFormatMessage;
+                    this.ShowOutputToUser();
+                }
+                catch (ArgumentException)
+                {
+                    this.output = EngineConstants.InvalidInputMessage;
+                    this.ShowOutputToUser();
+                }
             }
         }
 
         private string[] ParseCommand(string userInputAsString)
         {
-            var userInput = userInputAsString.Split(
-                new string[]{EngineConstants.UserInputSplitSymbol}, StringSplitOptions.RemoveEmptyEntries);
-            return userInput;
+            if (!string.IsNullOrEmpty(userInputAsString))
+            {
+                var userInput = userInputAsString.Split(
+                new string[] { EngineConstants.UserInputSplitSymbol }, StringSplitOptions.RemoveEmptyEntries);
+                return userInput;
+            }
+            
+            throw new ArgumentException();
         }
 
         private void InvokeCommand(string command, string[] arguments)
         {
             var currentCommand = this.GetCurrentCommand(command);
             currentCommand.RecieveArguments(arguments);
-            currentCommand.Execute(this.data);
+            this.output = currentCommand.Execute(this.data);
+            this.ShowOutputToUser();
         }
 
         private IEngineCommand GetCurrentCommand(string command)
@@ -82,6 +107,11 @@
             }
 
             return this.commands[commandType];
+        }
+
+        private void ShowOutputToUser()
+        {
+            this.userInterface.Write(this.output);
         }
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public struct SalesForDate
+    public struct SalesForDateInterval
     {
         public DateTime Date { get; set; }
 

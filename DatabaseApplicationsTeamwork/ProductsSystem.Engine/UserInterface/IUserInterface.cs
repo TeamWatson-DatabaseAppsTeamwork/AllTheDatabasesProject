@@ -4,10 +4,8 @@
     {
         string Input { get; }
 
-        string Output { get; }
-
         string Read();
 
-        void Write();
+        void Write(string output);
     }
 }

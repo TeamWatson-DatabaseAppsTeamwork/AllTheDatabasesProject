@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLExporter", "XMLExporter\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Client", "ProductsSystem.Client\ProductsSystem.Client.csproj", "{BFAA3E2B-3135-4B9E-9B27-66284D544735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFExporter", "PDFExporter\PDFExporter.csproj", "{420122AB-1C38-4D4A-AA8D-B57128F773ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfExporter", "PdfExporter\PdfExporter.csproj", "{420122AB-1C38-4D4A-AA8D-B57128F773ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Engine", "ProductsSystem.Engine\ProductsSystem.Engine.csproj", "{5556DEFF-3EF5-4C6B-A72B-4F0DA793DBBA}"
 EndProject

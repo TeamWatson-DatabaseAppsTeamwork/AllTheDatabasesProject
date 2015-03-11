@@ -7,10 +7,11 @@
     using PdfExporter.PdfAggregatedSalesExporter;
     using ProductsSystem.Data.Data;
     using PdfExporter;
+    using System.Linq;
 
     public class ExportPdfFileCommand : IEngineCommand
     {
-        private const int CommandArgumentsCount = 3;
+        private const int CommandArgumentsCount = 2;
         private PdfSalesExporter pdfExporter;
 
         public ExportPdfFileCommand(PdfSalesExporter pdfExporter)
@@ -62,42 +63,59 @@
         private IList<SalesForDateInterval> RetrieveAggregateSalesInformation(
             IProductsSystemData data, DateTime startDate, DateTime endDate)
         {
-            // TODO query to retrive data from the data repository
-            // Currently implemented with test data
+            var dataFiltered = data.Sales
+                .Find(s => s.Date >= startDate && s.Date <= endDate)
+                .GroupBy(s => s.Date);
 
-            var aggregatedSalesData = new List<SalesForDateInterval>
+            var aggregatedSalesData = new List<SalesForDateInterval>();
+            foreach (var group in dataFiltered)
             {
-                new SalesForDateInterval
-                {
-                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-                    Sales = new List<object>
+                var salesForDate = group.ToList();
+                aggregatedSalesData.Add
+                (
+                    new SalesForDateInterval
                     {
-                        new { Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m },
-                        new { Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00 }
-                    },
-                    TotaSum = 850
-                },
-                new SalesForDateInterval
-                {
-                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-                    Sales = new List<object>
-                    {
-                        new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
-                        new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
-                    },
-                    TotaSum = 850
-                },
-                new SalesForDateInterval
-                {
-                    Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-                    Sales = new List<object>
-                    {
-                        new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
-                        new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
-                    },
-                    TotaSum = 850
-                }
-            };
+                        Date = group.Key,
+                        Sales = group.ToList(),
+                        // TODO fix Product null result
+                        TotaSum = salesForDate.Sum(s => (s.Quantity * s.Product.Price))
+                    }
+                );
+            }
+
+        //    var aggregatedSalesData = new List<SalesForDateInterval>
+        //    {
+        //        new SalesForDateInterval
+        //        {
+        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
+        //            Sales = new List<object>
+        //            {
+        //                new { Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m },
+        //                new { Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00 }
+        //            },
+        //            TotaSum = 850
+        //        },
+        //        new SalesForDateInterval
+        //        {
+        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
+        //            Sales = new List<object>
+        //            {
+        //                new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
+        //                new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
+        //            },
+        //            TotaSum = 850
+        //        },
+        //        new SalesForDateInterval
+        //        {
+        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
+        //            Sales = new List<object>
+        //            {
+        //                new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
+        //                new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
+        //            },
+        //            TotaSum = 850
+        //        }
+        //    };
 
             return aggregatedSalesData;
         }

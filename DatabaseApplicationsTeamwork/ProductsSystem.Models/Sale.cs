@@ -7,17 +7,19 @@
     public class Sale
     {
         [Key, Column(Order = 1)]
+        [ForeignKey("Supermarket")]
         public int SupermarketId { get; set; }
 
-         [Key, Column(Order = 2)]
+        [Key, Column(Order = 2)]
+        [ForeignKey("Product")]
         public int ProductId { get; set; }
 
         public DateTime Date { get; set; }
 
         public int Quantity { get; set; }
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
-        public Supermarket Supermarket { get; set; } 
+        public virtual Supermarket Supermarket { get; set; } 
     }
 }

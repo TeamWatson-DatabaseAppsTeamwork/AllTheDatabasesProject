@@ -1,7 +1,10 @@
 namespace ProductsSystem.Data.Migrations
 {
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Globalization;
+    using System.Linq;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Models;
 
@@ -24,6 +27,7 @@ namespace ProductsSystem.Data.Migrations
             this.AddMeasures(context);
             this.AddProducts(context);
             this.AddSupermarkets(context);
+            this.AddSales(context);
         }
 
         private void AddVendors(ProductsSystemDbContext db)
@@ -105,11 +109,81 @@ namespace ProductsSystem.Data.Migrations
             (
               new Supermarket
               {
-                  Location = ""
-              }  
+                  Location = "Supermarket “Kaspichan – Center”"
+              },
+              new Supermarket
+              {
+                  Location = "Supermarket “Bourgas – Plaza”"
+              },
+              new Supermarket
+              {
+                  Location = "Supermarket “Bay Ivan” – Zmeyovo"
+              },
+              new Supermarket
+              {
+                  Location = "Supermarket “Plovdiv – Stolipinovo”"
+              }
             );
 
-            ((DbContext)db).SaveChanges();
+            db.SaveChanges();
+        }
+
+        private void AddSales(ProductsSystemDbContext db)
+        {
+            db.Sales.AddOrUpdate
+            (
+                new Sale
+                {
+                    ProductId = 3,
+                    SupermarketId = 1,
+                    Quantity = 40,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 1,
+                    SupermarketId = 2,
+                    Quantity = 37,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 4,
+                    SupermarketId = 3,
+                    Quantity = 7,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 2,
+                    SupermarketId = 2,
+                    Quantity = 14,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 4,
+                    SupermarketId = 1,
+                    Quantity = 14,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 2,
+                    SupermarketId = 3,
+                    Quantity = 4,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                },
+                new Sale
+                {
+                    ProductId = 1,
+                    SupermarketId = 1,
+                    Quantity = 65,
+                    Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
+                }
+            );
+
+            db.SaveChanges();
         }
     }
 }

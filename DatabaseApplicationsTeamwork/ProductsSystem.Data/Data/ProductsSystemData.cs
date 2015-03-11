@@ -64,7 +64,7 @@
             if (!this.repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(Repository<T>);
-                if (!typeof(T).IsAssignableFrom(repositoryType))
+                if (typeof(Product).IsAssignableFrom(type))
                 {
                     repositoryType = typeof(ProductsRepository);
                 }

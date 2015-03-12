@@ -22,9 +22,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Engine", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXmlExportClass", "TestXmlExportClass\TestXmlExportClass.csproj", "{FCD42D31-ADC6-458C-B4E7-93416F8D7661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonExporter", "JsonExporter\JsonExporter.csproj", "{DC9B4204-84A7-4144-8013-18BD09F04EC1}"
+<<<<<<< .mineProject("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlExporter", "XmlExporter\XmlExporter.csproj", "{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}"
 EndProject
-Global
+=======Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonExporter", "JsonExporter\JsonExporter.csproj", "{DC9B4204-84A7-4144-8013-18BD09F04EC1}"
+EndProject
+>>>>>>> .theirsGlobal
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -54,11 +56,15 @@ Global
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+<<<<<<< .mine		{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+=======		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+>>>>>>> .theirs	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

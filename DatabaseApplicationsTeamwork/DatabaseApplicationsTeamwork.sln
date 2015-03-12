@@ -22,11 +22,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Engine", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXmlExportClass", "TestXmlExportClass\TestXmlExportClass.csproj", "{FCD42D31-ADC6-458C-B4E7-93416F8D7661}"
 EndProject
-<<<<<<< .mineProject("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlExporter", "XmlExporter\XmlExporter.csproj", "{9AE6191B-2E5F-4F79-819C-9CF9EA381B0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonExporter", "JsonExporter\JsonExporter.csproj", "{DC9B4204-84A7-4144-8013-18BD09F04EC1}"
 EndProject
-=======Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonExporter", "JsonExporter\JsonExporter.csproj", "{DC9B4204-84A7-4144-8013-18BD09F04EC1}"
-EndProject
->>>>>>> .theirsGlobal
+Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

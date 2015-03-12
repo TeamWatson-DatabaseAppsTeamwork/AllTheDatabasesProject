@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Models", "ProductsSystem.Models\ProductsSystem.Models.csproj", "{CD978BBD-0BA1-4981-9725-70BC96809BF9}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Engine", "ProductsSystem.Engine\ProductsSystem.Engine.csproj", "{5556DEFF-3EF5-4C6B-A72B-4F0DA793DBBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXmlExportClass", "TestXmlExportClass\TestXmlExportClass.csproj", "{FCD42D31-ADC6-458C-B4E7-93416F8D7661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonExporter", "JsonExporter\JsonExporter.csproj", "{DC9B4204-84A7-4144-8013-18BD09F04EC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD42D31-ADC6-458C-B4E7-93416F8D7661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC9B4204-84A7-4144-8013-18BD09F04EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

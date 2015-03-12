@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JsonExporter\JsonExporter.csproj">
+      <Project>{dc9b4204-84a7-4144-8013-18bd09f04ec1}</Project>
+      <Name>JsonExporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PDFExporter\PDFExporter.csproj">
       <Project>{420122ab-1c38-4d4a-aa8d-b57128f773ed}</Project>
       <Name>PDFExporter</Name>

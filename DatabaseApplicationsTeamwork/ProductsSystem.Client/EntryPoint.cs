@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Threading;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
@@ -21,11 +22,15 @@
             // connection string
             // Configuration.InitializeDatabase(context);
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var data = ProductsSystemData.GetInstance(context);
-            var userInterface = new ConsoleUserInterface();
-            var engine = Engine.GetInstance(userInterface, data);
-            engine.Run();
+            //var userInterface = new ConsoleUserInterface();
+            //var engine = Engine.GetInstance(userInterface, data);
+            //engine.Run();
+            var product = data.Products.All().Select(
+                p => new {ProductName = p.Name, VendorName = p.Vendor.Name, QuantitySold = p.Sales.Sum(s => s.Quantity * p.Price)});
+            var json = JsonExporter.JsonExporter.ToJson(product);
+            Console.WriteLine(json);
         }
     }
 }

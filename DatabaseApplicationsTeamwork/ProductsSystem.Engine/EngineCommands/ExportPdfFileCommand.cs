@@ -4,10 +4,11 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using PdfExporter.PdfAggregatedSalesExporter;
     using ProductsSystem.Data.Data;
     using PdfExporter;
-    using System.Linq;
+    using System.Data.Entity;
 
     public class ExportPdfFileCommand : IEngineCommand
     {
@@ -65,20 +66,29 @@
         {
             var dataFiltered = data.Sales
                 .Find(s => s.Date >= startDate && s.Date <= endDate)
-                .GroupBy(s => s.Date);
+                .GroupBy(s => s.Date)
+                .ToDictionary(group => group.Key, group => group.ToList());
 
             var aggregatedSalesData = new List<SalesForDateInterval>();
             foreach (var group in dataFiltered)
             {
-                var salesForDate = group.ToList();
+                var sales = group.Value;
+
                 aggregatedSalesData.Add
                 (
                     new SalesForDateInterval
                     {
                         Date = group.Key,
-                        Sales = group.ToList(),
-                        // TODO fix Product null result
-                        TotaSum = salesForDate.Sum(s => (s.Quantity * s.Product.Price))
+                        Sales = group.Value.Select(sale =>
+                            new
+                            {
+                                Product = sale.Product.Name,
+                                Quantity = sale.Quantity + " " + sale.Product.Measure.Name,
+                                UnitPrice = sale.Product.Price,
+                                Location = sale.Supermarket.Location,
+                                Sum = sale.Quantity * sale.Product.Price
+                            }).ToList(),
+                        TotaSum = group.Value.Sum(s => (s.Quantity * s.Product.Price))
                     }
                 );
             }

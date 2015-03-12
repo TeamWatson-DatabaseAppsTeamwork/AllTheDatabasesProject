@@ -35,8 +35,8 @@
         {
             while (true)
             {
-                try
-                {
+                //try
+                //{
                     string userInputAsString = this.userInterface.Read();
                     var userInput = this.ParseCommand(userInputAsString);
                     string command = userInput[0];
@@ -47,22 +47,22 @@
 
                     string[] commandArguments = userInput.Skip(1).ToArray();
                     this.InvokeCommand(command, commandArguments);
-                }
-                catch (InvalidOperationException operationException)
-                {
-                    this.output = operationException.Message;
-                    this.ShowOutputToUser();
-                }
-                catch (FormatException)
-                {
-                    this.output = EngineConstants.InvalidInputFormatMessage;
-                    this.ShowOutputToUser();
-                }
-                catch (ArgumentException)
-                {
-                    this.output = EngineConstants.InvalidInputMessage;
-                    this.ShowOutputToUser();
-                }
+                //}
+                //catch (InvalidOperationException operationException)
+                //{
+                //    this.output = operationException.Message;
+                //    this.ShowOutputToUser();
+                //}
+                //catch (FormatException)
+                //{
+                //    this.output = EngineConstants.InvalidInputFormatMessage;
+                //    this.ShowOutputToUser();
+                //}
+                //catch (ArgumentException argumentException)
+                //{
+                //    this.output = argumentException.Message;
+                //    this.ShowOutputToUser();
+                //}
             }
         }
 

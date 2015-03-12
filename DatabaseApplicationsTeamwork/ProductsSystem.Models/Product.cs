@@ -1,6 +1,7 @@
 ﻿namespace ProductsSystem.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Product
     {
@@ -10,13 +11,17 @@
 
         public decimal Price { get; set; }
 
+        [ForeignKey("Vendor")]
         public int VendorId { get; set; }
 
-        public Vendor Vendor { get; set; }
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { get; set; }
 
+        [ForeignKey("Measure")]
         public int MeasureId { get; set; }
 
-        public Measure Measure { get; set; }
+        [ForeignKey("MeasureId")]
+        public virtual Measure Measure { get; set; }
 
         public virtual ICollection<Sale> Sales { get; set; }
     }

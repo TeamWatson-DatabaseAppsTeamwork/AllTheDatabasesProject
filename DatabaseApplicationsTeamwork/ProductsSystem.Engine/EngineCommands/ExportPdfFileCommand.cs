@@ -8,6 +8,7 @@
     using PdfExporter.PdfAggregatedSalesExporter;
     using ProductsSystem.Data.Data;
     using PdfExporter;
+    using ProductsSystem.Engine.CustomExceptions;
 
     public class ExportPdfFileCommand : IEngineCommand
     {
@@ -53,7 +54,7 @@
                 return commandOutput;
             }
 
-            throw new InvalidOperationException(EngineConstants.MissingCommandArgumentsMessage);
+            throw new SupermarketsChainException(EngineConstants.MissingCommandArgumentsMessage);
         }
 
         /// <summary>
@@ -64,10 +65,23 @@
         /// String array holding users search parameters for retrieving sales data</param>
         public void RecieveArguments(string[] rawArguments)
         {
-            var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
-            var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
-            this.Arguments[0] = startDate;
-            this.Arguments[1] = endDate;
+            try
+            {
+                var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+                var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+                if (endDate <= startDate)
+                {
+                    throw new SupermarketsChainException(EngineConstants.InvaliDateRangeMessage);
+                }
+
+                this.Arguments[0] = startDate;
+                this.Arguments[1] = endDate;
+            }
+            catch (FormatException)
+            {
+                throw new SupermarketsChainException(EngineConstants.InvalidInputFormatMessage);
+            }
+            
         }
 
         private IList<SalesForDateInterval> RetrieveAggregateSalesInformation(

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using ProductsSystem.Data.Data;
+    using ProductsSystem.Engine.CustomExceptions;
     using ProductsSystem.Engine.EngineCommands;
 
     public class Engine
@@ -35,8 +36,8 @@
         {
             while (true)
             {
-                //try
-                //{
+                try
+                {
                     string userInputAsString = this.userInterface.Read();
                     var userInput = this.ParseCommand(userInputAsString);
                     string command = userInput[0];
@@ -47,22 +48,12 @@
 
                     string[] commandArguments = userInput.Skip(1).ToArray();
                     this.InvokeCommand(command, commandArguments);
-                //}
-                //catch (InvalidOperationException operationException)
-                //{
-                //    this.output = operationException.Message;
-                //    this.ShowOutputToUser();
-                //}
-                //catch (FormatException)
-                //{
-                //    this.output = EngineConstants.InvalidInputFormatMessage;
-                //    this.ShowOutputToUser();
-                //}
-                //catch (ArgumentException argumentException)
-                //{
-                //    this.output = argumentException.Message;
-                //    this.ShowOutputToUser();
-                //}
+                }
+                catch (SupermarketsChainException supermarketsChainException)
+                {
+                    this.output = supermarketsChainException.Message;
+                    this.ShowOutputToUser();
+                }
             }
         }
 
@@ -100,7 +91,7 @@
                     commandType = typeof(ExportXmlFileCommand);
                     break;
                 default:
-                    throw new InvalidOperationException(EngineConstants.InvalidCommandMessage);
+                    throw new SupermarketsChainException(EngineConstants.InvalidCommandMessage);
             }
 
             currentCommand = this.PullCommand(commandType);

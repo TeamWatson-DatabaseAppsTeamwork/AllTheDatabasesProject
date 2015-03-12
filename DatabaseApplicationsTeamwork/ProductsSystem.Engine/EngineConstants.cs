@@ -14,7 +14,7 @@
         // Messages
             // Error messages
         public const string MissingCommandArgumentsMessage =
-            "Arguments required for the command execution currently missing";
+            "Arguments required for the command execution currently missing.";
 
         public const string InvalidInputFormatMessage =
             "Please ensure that you are using the correct fomat for the input data.";
@@ -22,12 +22,14 @@
         public const string InvalidCommandMessage = "Invalid commnd. Please try again.";
 
         public const string InvalidInputMessage =
-            "Please ensure you have entered non-empty command";
+            "Please ensure you have entered non-empty command.";
 
         public const string NoResultDataMessage = "No data found to be exported. Please try again.";
 
+        public const string InvaliDateRangeMessage = "The date range is invalid. Please try again.";
+
             // Success messages
         public const string PdfReportSuccessfullyExportedMessage =
-            "PDF report successfully exported";
+            "PDF report successfully exported.";
     }
 }

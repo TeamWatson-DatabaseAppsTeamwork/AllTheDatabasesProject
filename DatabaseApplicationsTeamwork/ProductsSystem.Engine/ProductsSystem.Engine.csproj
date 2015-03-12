@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomExceptions\SupermarketsChainException.cs" />
     <Compile Include="EngineCommands\CommandFactory.cs" />
     <Compile Include="EngineCommands\ExportPdfFileCommand.cs" />
     <Compile Include="EngineCommands\ExportXmlFileCommand.cs" />

@@ -65,6 +65,10 @@
       <Project>{cd978bbd-0ba1-4981-9725-70bc96809bf9}</Project>
       <Name>ProductsSystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XmlExporter\XmlExporter.csproj">
+      <Project>{9ae6191b-2e5f-4f79-819c-9cf9ea381b0b}</Project>
+      <Name>XmlExporter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

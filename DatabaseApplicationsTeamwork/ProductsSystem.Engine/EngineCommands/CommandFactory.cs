@@ -3,31 +3,34 @@
     using System;
     using PdfExporter;
 
+    using XmlExporter.XmlAggregatedSalesExporter;
+
     public static class CommandFactory
     {
         public static IEngineCommand CreateCommand(Type type)
         {
             if (type == typeof(ExportPdfFileCommand))
             {
-                return CreateExportPDFFileCommand();
+                return CreateExportPdfFileCommand();
             }
             //else if (type == typeof(ExportXMLFileCommand))
             //{
-                return CreateExportXMLFileCommand();
+                return CreateExportXmlFileCommand();
             //}
         }
 
-        private static ExportPdfFileCommand CreateExportPDFFileCommand()
+        private static ExportPdfFileCommand CreateExportPdfFileCommand()
         {
             var pdfExporter = new PdfSalesExporter();
             var createExportPdfFileCommand = new ExportPdfFileCommand(pdfExporter);
             return createExportPdfFileCommand;
         }
 
-        private static ExportXmlFileCommand CreateExportXMLFileCommand()
+        private static ExportXmlFileCommand CreateExportXmlFileCommand()
         {
-            var exportXMLFileCommand = new ExportXmlFileCommand();
-            return exportXMLFileCommand;
+            var xmlExporter = new XmlSalesExporter();
+            var exportXmlFileCommand = new ExportXmlFileCommand(xmlExporter);
+            return exportXmlFileCommand;
         }
     }
 }

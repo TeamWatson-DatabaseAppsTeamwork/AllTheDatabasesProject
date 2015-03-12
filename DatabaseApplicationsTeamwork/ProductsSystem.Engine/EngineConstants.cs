@@ -31,5 +31,7 @@
             // Success messages
         public const string PdfReportSuccessfullyExportedMessage =
             "PDF report successfully exported.";
+        public const string XmlReportSuccessfullyExportedMessage =
+            "XML report successfully exported.";
     }
 }

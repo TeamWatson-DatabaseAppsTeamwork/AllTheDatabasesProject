@@ -24,6 +24,8 @@
         public const string InvalidInputMessage =
             "Please ensure you have entered non-empty command";
 
+        public const string NoResultDataMessage = "No data found to be exported. Please try again.";
+
             // Success messages
         public const string PdfReportSuccessfullyExportedMessage =
             "PDF report successfully exported";

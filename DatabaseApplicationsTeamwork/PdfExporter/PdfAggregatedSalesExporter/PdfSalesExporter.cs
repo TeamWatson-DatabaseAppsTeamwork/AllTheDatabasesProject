@@ -3,29 +3,40 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
     using PdfExporter.PdfAggregatedSalesExporter;
 
     public class PdfSalesExporter : IPdfExporter
     {
-        private const string Heading = "Aggregated Sales Report";
+        // File Parameters
         private const string DefaultFileName = "Aggregated-Sales-Report.pdf";
-        private const int DefaultColumnsNumber = 5;
+        private readonly string DefaultFileFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private readonly string[] DefaultCellsHeadings = new[] { "Product", "Quantity", "Unit Price", "Location", "Sum" };
+        // Headings
+        private const string Heading = "Aggregated Sales Report";
         private const string DefaultTotalRowHeading = "Total sum for {0}:";
+        private const string DefaultGrandTotalRowHeading = "Grand total:";
+        // Table settings
+        private const int DefaultColumnsNumber = 5;
         private const string DefaultDateFormat = "dd-MMM-yyyy";
         private readonly float[] tableDefaultColumnWidths = new[] {2f, 1f, 1f, 3f, 1f};
-        private readonly string defaultFileFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        private readonly Font defaultHeadingFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-        private readonly Font defaultAggregatedRowFont = new Font(Font.FontFamily.HELVETICA, 10);
-        private readonly Font defaultCellFont = new Font(Font.FontFamily.HELVETICA, 9);
-        private readonly string[] defaultCellsHeadings = new[] {"Product", "Quantity", "Unit Price", "Location", "Sum"};
+        // Fonts
+        private readonly Font DefaultHeadingFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+        private readonly Font DefaultAggregatedRowFont = new Font(Font.FontFamily.HELVETICA, 10);
+        private readonly Font DefaultCellFont = new Font(Font.FontFamily.HELVETICA, 9);
+        // Colors
+        private readonly BaseColor DefaultGrandTotalRowColor = new BaseColor(180, 198, 231);
+        private readonly BaseColor DefaultDateRowColor = new BaseColor(242, 242, 242);
+        private readonly BaseColor DefaultColumnsHeadingsColor = new BaseColor(217, 217, 217);
+
 
         private IList<SalesForDateInterval> data;
 
         public PdfSalesExporter()
         {
-            this.FileFolderPath = this.defaultFileFolderPath;
+            this.FileFolderPath = this.DefaultFileFolderPath;
             this.FileName = DefaultFileName;
             this.ColumnsNumber = DefaultColumnsNumber;
         }
@@ -73,17 +84,32 @@
             var dataTable = new PdfPTable(this.ColumnsNumber);
             dataTable.DefaultCell.Border = 0;
             dataTable.WidthPercentage = 90;
-            var tableHeading = this.CreateCell(this.defaultHeadingFont, DefaultColumnsNumber, 1, Heading);
-            dataTable.AddCell(tableHeading);
             dataTable.SetWidths(this.tableDefaultColumnWidths);
 
+            this.AddTableHeading(ref dataTable);
+            this.AddTableContent(ref dataTable);
+            var grandTotalSum = this.Data.Sum(sale => sale.TotaSum);
+            this.AddGrandTotalRow(
+                DefaultGrandTotalRowHeading, grandTotalSum, DefaultGrandTotalRowColor, ref dataTable);
+
+            pdfDocument.Add(dataTable);
+        }
+
+        private void AddTableHeading(ref PdfPTable dataTable)
+        {
+            var tableHeading = this.CreateCell(this.DefaultHeadingFont, DefaultColumnsNumber, 1, Heading);
+            dataTable.AddCell(tableHeading);
+        }
+
+        private void AddTableContent(ref PdfPTable dataTable)
+        {
             foreach (var date in this.Data)
             {
                 var dateCell = this.CreateCell(
-                    this.defaultAggregatedRowFont, DefaultColumnsNumber, 0, date.Date.ToString(DefaultDateFormat));
-                dateCell.BackgroundColor = new BaseColor(242, 242, 242);
+                    this.DefaultAggregatedRowFont, DefaultColumnsNumber, 0, date.Date.ToString(DefaultDateFormat));
+                dateCell.BackgroundColor = DefaultDateRowColor;
                 dataTable.AddCell(dateCell);
-                var cellsHeadings = this.CreateTableRow(this.defaultCellsHeadings, 1, new BaseColor(217, 217, 217));
+                var cellsHeadings = this.CreateTableRow(DefaultCellsHeadings, 1, DefaultColumnsHeadingsColor);
                 dataTable.Rows.Add(cellsHeadings);
                 foreach (var sale in date.Sales)
                 {
@@ -93,8 +119,17 @@
 
                 this.CreateTotalRow(date.Date, date.TotaSum, ref dataTable);
             }
+        }
 
-            pdfDocument.Add(dataTable);
+        private void AddGrandTotalRow(
+            string grandTotalRowHeading, decimal grandTotalSum, BaseColor backgroudColor, ref PdfPTable dataTable)
+        {
+            var totalRowHeading = this.CreateCell(
+                this.DefaultAggregatedRowFont, 4, backgroudColor, 2, grandTotalRowHeading);
+            var totalRowValue = this.CreateCell(
+                this.DefaultAggregatedRowFont, 1, backgroudColor, 2, grandTotalSum.ToString());
+            dataTable.AddCell(totalRowHeading);
+            dataTable.AddCell(totalRowValue);
         }
 
         private PdfPCell CreateCell(Font font, int colspan, int alignment, string text)
@@ -120,7 +155,7 @@
 
             foreach (var property in rowData.GetType().GetProperties())
             {
-                var cell = this.CreateCell(this.defaultCellFont, 1, cellsAlignment, property.GetValue(rowData, null).ToString());
+                var cell = this.CreateCell(this.DefaultCellFont, 1, cellsAlignment, property.GetValue(rowData, null).ToString());
                 cells.Add(cell);
             }
 
@@ -145,7 +180,7 @@
 
             foreach (var cellData in rowData)
             {
-                var cell = this.CreateCell(this.defaultCellFont, 1, cellsAlignment, cellData.ToString());
+                var cell = this.CreateCell(this.DefaultCellFont, 1, cellsAlignment, cellData.ToString());
                 cells.Add(cell);
             }
 
@@ -167,10 +202,10 @@
         private void CreateTotalRow(DateTime date, decimal totalSum, ref PdfPTable dataTable)
         {
             var totalRowHeading = this.CreateCell(
-                this.defaultAggregatedRowFont, 4, 2,
+                this.DefaultAggregatedRowFont, 4, 2,
                     string.Format(DefaultTotalRowHeading, date.ToString(DefaultDateFormat)));
             var totalRowValue = this.CreateCell(
-                this.defaultAggregatedRowFont, 1, 2,
+                this.DefaultAggregatedRowFont, 1, 2,
                     totalSum.ToString());
             dataTable.AddCell(totalRowHeading);
             dataTable.AddCell(totalRowValue);

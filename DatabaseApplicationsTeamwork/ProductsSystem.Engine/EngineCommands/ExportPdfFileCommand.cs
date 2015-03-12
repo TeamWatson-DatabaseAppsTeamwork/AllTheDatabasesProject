@@ -8,7 +8,6 @@
     using PdfExporter.PdfAggregatedSalesExporter;
     using ProductsSystem.Data.Data;
     using PdfExporter;
-    using System.Data.Entity;
 
     public class ExportPdfFileCommand : IEngineCommand
     {
@@ -33,15 +32,25 @@
         /// to process the command</exception>
         public string Execute(IProductsSystemData data)
         {
+            var commandOutput = "";
+
             if (this.Arguments.Count == CommandArgumentsCount)
             {
                 var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
                     data, (DateTime)Arguments[0], (DateTime)Arguments[1]);
-                pdfExporter.Data = aggregatedSalesData;
-                pdfExporter.Export();
-                this.Arguments.Clear();
+                if (aggregatedSalesData.Count == 0)
+                {
+                    commandOutput = EngineConstants.NoResultDataMessage;
+                }
+                else
+                {
+                    pdfExporter.Data = aggregatedSalesData;
+                    pdfExporter.Export(); 
+                    commandOutput = EngineConstants.PdfReportSuccessfullyExportedMessage;
+                }
 
-                return EngineConstants.PdfReportSuccessfullyExportedMessage;
+                this.Arguments.Clear();
+                return commandOutput;
             }
 
             throw new InvalidOperationException(EngineConstants.MissingCommandArgumentsMessage);

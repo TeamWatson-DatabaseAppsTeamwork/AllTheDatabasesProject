@@ -14,6 +14,7 @@
         public static void Main(string[] args)
         {
             var context = new ProductsSystemDbContext();
+
             // Execute the following method if do not have the
             // database in sql server
             // It will add sample data automatically
@@ -21,7 +22,6 @@
             // you have the name of your sql server in the
             // connection string
             // Configuration.InitializeDatabase(context);
-
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var data = ProductsSystemData.GetInstance(context);
             //var userInterface = new ConsoleUserInterface();

@@ -1,12 +1,14 @@
 ﻿namespace ProductsSystem.Data.Repositories
 {
+    using System.Collections;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Linq.Expressions;
     using ProductsSystem.Data.Contexts;
 
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T>, IEnumerable
+        where T : class
     {
         public Repository(IProductsSystemDbContext context)
         {
@@ -56,6 +58,11 @@
             entry.State = EntityState.Detached;
         }
 
+        public void SaveChanges()
+        {
+            this.Context.SaveChanges();
+        }
+
         private void ChangeState(T entity, EntityState state)
         {
             var entry = this.AttachIfDetached(entity);
@@ -71,6 +78,11 @@
             }
 
             return entry;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -6,8 +6,8 @@
     using System.Globalization;
     using System.Linq;
     using PdfExporter.PdfAggregatedSalesExporter;
+
     using ProductsSystem.Data.Data;
-    using PdfExporter;
     using ProductsSystem.Engine.CustomExceptions;
 
     public class ExportPdfFileCommand : IEngineCommand
@@ -38,15 +38,15 @@
             if (this.Arguments.Count == CommandArgumentsCount)
             {
                 var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
-                    data, (DateTime)Arguments[0], (DateTime)Arguments[1]);
+                    data, (DateTime)this.Arguments[0], (DateTime)this.Arguments[1]);
                 if (aggregatedSalesData.Count == 0)
                 {
                     commandOutput = EngineConstants.NoResultDataMessage;
                 }
                 else
                 {
-                    pdfExporter.Data = aggregatedSalesData;
-                    pdfExporter.Export(); 
+                    this.pdfExporter.Data = aggregatedSalesData;
+                    this.pdfExporter.Export(); 
                     commandOutput = EngineConstants.PdfReportSuccessfullyExportedMessage;
                 }
 
@@ -97,10 +97,9 @@
             {
                 var sales = group.Value;
 
-                aggregatedSalesData.Add
-                (
+                aggregatedSalesData.Add(
                     new SalesForDateInterval
-                    {
+                        {
                         Date = group.Key,
                         Sales = group.Value.Select(sale =>
                             new
@@ -112,8 +111,7 @@
                                 Sum = sale.Quantity * sale.Product.Price
                             }).ToList(),
                         TotaSum = group.Value.Sum(s => (s.Quantity * s.Product.Price))
-                    }
-                );
+                    });
             }
 
         //    var aggregatedSalesData = new List<SalesForDateInterval>

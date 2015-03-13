@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace XmlExporter.XmlAggregatedSalesExporter
+﻿namespace XmlExporter.XmlAggregatedSalesExporter
 {
+    using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     using PdfExporter.PdfAggregatedSalesExporter;
 

@@ -1,7 +1,8 @@
 ﻿namespace ProductsSystem.Engine.EngineCommands
 {
     using System;
-    using PdfExporter;
+
+    using PdfExporter.PdfAggregatedSalesExporter;
 
     using XmlExporter.XmlAggregatedSalesExporter;
 
@@ -13,7 +14,7 @@
             {
                 return CreateExportPdfFileCommand();
             }
-            //else if (type == typeof(ExportXMLFileCommand))
+            //else if (type == typeof(ExportXmlFileCommand))
             //{
                 return CreateExportXmlFileCommand();
             //}

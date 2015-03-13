@@ -6,6 +6,7 @@
     using ProductsSystem.Data.Data;
     using ProductsSystem.Engine.CustomExceptions;
     using ProductsSystem.Engine.EngineCommands;
+    using ProductsSystem.Engine.UserInterface;
 
     public class Engine
     {

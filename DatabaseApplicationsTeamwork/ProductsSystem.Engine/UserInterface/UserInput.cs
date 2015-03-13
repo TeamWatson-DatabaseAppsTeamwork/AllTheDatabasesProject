@@ -1,4 +1,4 @@
-﻿namespace ProductsSystem.Engine
+﻿namespace ProductsSystem.Engine.UserInterface
 {
     using System.Collections;
 

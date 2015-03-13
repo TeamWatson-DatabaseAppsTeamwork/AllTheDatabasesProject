@@ -3,10 +3,8 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
 
-    using PdfExporter;
     using PdfExporter.PdfAggregatedSalesExporter;
 
     using ProductsSystem.Data.Data;
@@ -50,7 +48,7 @@
                 //else
                 //{
                     //xmlExporter.Data = aggregatedSalesData;
-                    xmlExporter.Export();
+                    this.xmlExporter.Export();
                 //    commandOutput = EngineConstants.XmlReportSuccessfullyExportedMessage;
                 //}
 
@@ -84,8 +82,7 @@
             //catch (FormatException)
             //{
             //    throw new SupermarketsChainException(EngineConstants.InvalidInputFormatMessage);
-            //}
-            
+            //}   
         }
 
         private IList<SalesForDateInterval> RetrieveAggregateSalesInformation(
@@ -101,10 +98,9 @@
             {
                 var sales = group.Value;
 
-                aggregatedSalesData.Add
-                (
+                aggregatedSalesData.Add(
                     new SalesForDateInterval
-                    {
+                        {
                         Date = group.Key,
                         Sales = group.Value.Select(sale =>
                             new

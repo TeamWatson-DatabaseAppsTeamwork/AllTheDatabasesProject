@@ -4,7 +4,6 @@ namespace ProductsSystem.Data.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Globalization;
-    using System.Linq;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Models;
 
@@ -105,10 +104,9 @@ namespace ProductsSystem.Data.Migrations
 
         private void AddSupermarkets(ProductsSystemDbContext db)
         {
-            db.Supermarkets.AddOrUpdate
-            (
-              new Supermarket
-              {
+            db.Supermarkets.AddOrUpdate(
+                new Supermarket
+                    {
                   Location = "Supermarket “Kaspichan – Center”"
               },
               new Supermarket
@@ -122,19 +120,17 @@ namespace ProductsSystem.Data.Migrations
               new Supermarket
               {
                   Location = "Supermarket “Plovdiv – Stolipinovo”"
-              }
-            );
+              });
 
             db.SaveChanges();
         }
 
         private void AddSales(ProductsSystemDbContext db)
         {
-            db.Sales.AddOrUpdate
-            (
+            db.Sales.AddOrUpdate(
                 new Sale
-                {
-                    ProductId = 3,
+                    {
+                        ProductId = 3,
                     SupermarketId = 1,
                     Quantity = 40,
                     Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
@@ -180,8 +176,7 @@ namespace ProductsSystem.Data.Migrations
                     SupermarketId = 1,
                     Quantity = 65,
                     Date = DateTime.ParseExact("20-07-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture)
-                }
-            );
+                });
 
             db.SaveChanges();
         }

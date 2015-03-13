@@ -8,6 +8,7 @@
     using ProductsSystem.Data.Data;
     using ProductsSystem.Data.Migrations;
     using ProductsSystem.Engine;
+    using ProductsSystem.Engine.UserInterface;
 
     public class Program
     {

@@ -3,11 +3,13 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using PdfExporter.PdfAggregatedSalesExporter;
 
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Repositories;
+    using ProductsSystem.DataTransferObjects;
     using ProductsSystem.Models;
 
     public class XmlSalesExporter : IXmlExporter
@@ -51,23 +53,30 @@
             //}
 
             var context = new ProductsSystemDbContext();
-            var vendors = new Repository<Vendor>(context);
-            var count = 1;
-            foreach (var vendor in vendors.All())
-            {
-                //var tempVendor = new Vendor()
-                //                      {
-                //                          Name = vendor.Name
-                //                      };
-                var writer = new System.Xml.Serialization.XmlSerializer(typeof(Vendor));
 
+            var sales = new Repository<Sale>(context);
+            var salesAggregated = sales.All()
+                .GroupBy(s => new { s.Product.Vendor, s.Date })
+                .Select(sg => new SalesAggregated
+                {
+                    VendorName = sg.Key.Vendor.Name,
+                    Date = sg.Key.Date,
+                    TotalSum = sg.Sum(s => s.Quantity * s.Product.Price),
+                })
+                .ToList();
+
+            var count = 1;
+            foreach (var sale in salesAggregated)
+            {
+                var writer = new System.Xml.Serialization.XmlSerializer(typeof(SalesAggregated));
                 var file = new System.IO.StreamWriter(
                     @"c:\temp\TestXmlExport" + count + ".xml");
-                writer.Serialize(file, vendor);
+                writer.Serialize(file, sale);
                 file.Close();
-                Console.WriteLine("work done");
                 count++;
             }
+
+            Console.WriteLine("work done - check temp folder on c: ;)");
         }
 
         public void SetDefaultFileFolder(string fileFolderPath)

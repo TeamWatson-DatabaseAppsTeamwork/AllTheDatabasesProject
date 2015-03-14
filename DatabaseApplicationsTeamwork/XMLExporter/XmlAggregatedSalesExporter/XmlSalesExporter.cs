@@ -3,7 +3,10 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
+    using System.Xml.Serialization;
 
     using PdfExporter.PdfAggregatedSalesExporter;
 
@@ -54,27 +57,19 @@
 
             var context = new ProductsSystemDbContext();
 
-            var sales = new Repository<Sale>(context);
+            var sales = new Repository<ProductsSystem.Models.Sale>(context);
             var salesAggregated = sales.All()
-                .GroupBy(s => new { s.Product.Vendor, s.Date })
-                .Select(sg => new SalesAggregated
+                .GroupBy(s => s.Product.Vendor)
+                .Select(sgv => new SalesAggregated
                 {
-                    VendorName = sg.Key.Vendor.Name,
-                    Date = sg.Key.Date,
-                    TotalSum = sg.Sum(s => s.Quantity * s.Product.Price),
-                })
-                .ToList();
+                    VendorName = sgv.Key.Name,
+                    RawSummaries = sgv.GroupBy(s => s.Date).Select(sgd => new SalesSummary { Date = sgd.Key, TotalSum = sgd.Sum(s => s.Product.Price * s.Quantity) })
+                }).ToList();
 
-            var count = 1;
-            foreach (var sale in salesAggregated)
-            {
-                var writer = new System.Xml.Serialization.XmlSerializer(typeof(SalesAggregated));
-                var file = new System.IO.StreamWriter(
-                    @"c:\temp\TestXmlExport" + count + ".xml");
-                writer.Serialize(file, sale);
-                file.Close();
-                count++;
-            }
+            var serializer = new XmlSerializer(typeof(List<SalesAggregated>));
+            TextWriter textWriter = new StreamWriter(@"c:\temp\Sales-by-Vendors-Report.xml");
+            serializer.Serialize(textWriter, salesAggregated);
+            textWriter.Close();
 
             Console.WriteLine("work done - check temp folder on c: ;)");
         }

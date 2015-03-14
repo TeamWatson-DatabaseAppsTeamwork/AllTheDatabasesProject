@@ -1,5 +1,10 @@
 ﻿namespace TestXmlExportClass
 {
+    using System;
+    using System.Xml.Serialization;
+
+    using ProductsSystem.DataTransferObjects;
+
     public class EntryPoint
     {
         public static void Main(string[] args)
@@ -9,8 +14,9 @@
 
         public static void WriteXml()
         {
+            //var testSale = new SalesAggregated() { VendorName = "test vendor", Date = DateTime.Now, TotalSum = 23 };
             var overview = new Book("Serialization Overview");
-            var writer = new System.Xml.Serialization.XmlSerializer(typeof(Book));
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof(SalesAggregated));
 
             var file = new System.IO.StreamWriter(
                 @"c:\temp\SerializationOverview.xml");
@@ -30,6 +36,7 @@
                 this.Title = title;
             }
 
+            [XmlAttribute]
             public string Title { get; set; }
         }
     }

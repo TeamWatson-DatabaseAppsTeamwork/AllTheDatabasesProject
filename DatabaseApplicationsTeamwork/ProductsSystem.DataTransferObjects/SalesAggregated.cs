@@ -1,13 +1,36 @@
 ﻿namespace ProductsSystem.DataTransferObjects
 {
-    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
 
+    [XmlType(TypeName = "sale")]
     public class SalesAggregated
     {
+        public SalesAggregated()
+            : this(string.Empty)
+        { 
+        }
+
+        public SalesAggregated(string vendorName)
+        {
+            this.VendorName = vendorName;
+            this.RawSummaries = new List<SalesSummary>();
+        }
+
+        [XmlAttribute("vendor")]
         public string VendorName { get; set; }
 
-        public DateTime Date { get; set; }
+        [XmlIgnore]
+        public IEnumerable<SalesSummary> RawSummaries { get; set; }
 
-        public decimal TotalSum { get; set; }
+        [XmlArray("summaries")]
+        public List<SalesSummary> Summaries
+        {
+            get
+            {
+                return this.RawSummaries.ToList();
+            }
+        }
     }
 }

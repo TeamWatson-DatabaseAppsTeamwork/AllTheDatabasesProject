@@ -13,7 +13,9 @@
 
         IRepository<Supermarket> Supermarkets { get; }
 
-        IRepository<Sale> Sales { get; } 
+        IRepository<Sale> Sales { get; }
+
+        IRepository<Expense> Expenses { get; } 
 
         int SaveChanges();
     }

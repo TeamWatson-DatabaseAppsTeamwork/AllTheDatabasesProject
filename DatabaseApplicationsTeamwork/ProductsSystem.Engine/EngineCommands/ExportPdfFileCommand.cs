@@ -18,7 +18,7 @@
         public ExportPdfFileCommand(PdfSalesExporter pdfExporter)
         {
             this.pdfExporter = pdfExporter;
-            this.Arguments = new DateTime[2];
+            this.Arguments = new DateTime[CommandArgumentsCount];
         }
 
         public IList Arguments { get; private set; }
@@ -35,26 +35,21 @@
         {
             var commandOutput = "";
 
-            if (this.Arguments.Count == CommandArgumentsCount)
+            var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
+                data, (DateTime)this.Arguments[0], (DateTime)this.Arguments[1]);
+            if (aggregatedSalesData.Count == 0)
             {
-                var aggregatedSalesData = this.RetrieveAggregateSalesInformation(
-                    data, (DateTime)this.Arguments[0], (DateTime)this.Arguments[1]);
-                if (aggregatedSalesData.Count == 0)
-                {
-                    commandOutput = EngineConstants.NoResultDataMessage;
-                }
-                else
-                {
-                    this.pdfExporter.Data = aggregatedSalesData;
-                    this.pdfExporter.Export(); 
-                    commandOutput = EngineConstants.PdfReportSuccessfullyExportedMessage;
-                }
-
-                this.Arguments.Clear();
-                return commandOutput;
+                commandOutput = EngineConstants.NoResultDataMessage;
+            }
+            else
+            {
+                this.pdfExporter.Data = aggregatedSalesData;
+                this.pdfExporter.Export(); 
+                commandOutput = EngineConstants.PdfReportSuccessfullyExportedMessage;
             }
 
-            throw new SupermarketsChainException(EngineConstants.MissingCommandArgumentsMessage);
+            this.Arguments.Clear();
+            return commandOutput;
         }
 
         /// <summary>
@@ -65,23 +60,29 @@
         /// String array holding users search parameters for retrieving sales data</param>
         public void RecieveArguments(string[] rawArguments)
         {
-            try
+            if (rawArguments.Count() == CommandArgumentsCount)
             {
-                var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
-                var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
-                if (endDate <= startDate)
+                try
                 {
-                    throw new SupermarketsChainException(EngineConstants.InvaliDateRangeMessage);
-                }
+                    var startDate = DateTime.ParseExact(rawArguments[0], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+                    var endDate = DateTime.ParseExact(rawArguments[1], EngineConstants.DateFormat, CultureInfo.InvariantCulture);
+                    if (endDate <= startDate)
+                    {
+                        throw new SupermarketsChainException(EngineConstants.InvaliDateRangeMessage);
+                    }
 
-                this.Arguments[0] = startDate;
-                this.Arguments[1] = endDate;
+                    this.Arguments[0] = startDate;
+                    this.Arguments[1] = endDate;
+                }
+                catch (FormatException)
+                {
+                    throw new SupermarketsChainException(EngineConstants.InvalidInputFormatMessage);
+                }  
             }
-            catch (FormatException)
+            else
             {
-                throw new SupermarketsChainException(EngineConstants.InvalidInputFormatMessage);
+                throw new SupermarketsChainException(EngineConstants.MissingCommandArgumentsMessage);
             }
-            
         }
 
         private IList<SalesForDateInterval> RetrieveAggregateSalesInformation(

@@ -15,12 +15,12 @@
         // Messages
             // Error messages
         public const string MissingCommandArgumentsMessage =
-            "Arguments required for the command execution currently missing.";
+            "Arguments count do not match the count needed for the command execution";
 
         public const string InvalidInputFormatMessage =
             "Please ensure that you are using the correct fomat for the input data.";
 
-        public const string InvalidCommandMessage = "Invalid commnd. Please try again.";
+        public const string InvalidCommandMessage = "Invalid command. Please try again.";
 
         public const string InvalidInputMessage =
             "Please ensure you have entered non-empty command.";

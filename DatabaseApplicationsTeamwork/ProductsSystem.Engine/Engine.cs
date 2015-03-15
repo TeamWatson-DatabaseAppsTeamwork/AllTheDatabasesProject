@@ -1,7 +1,6 @@
 ﻿namespace ProductsSystem.Engine
 {
     using System;
-    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using ProductsSystem.Data.Data;
@@ -68,7 +67,7 @@
                 return userInput;
             }
             
-            throw new ArgumentException();
+            throw new SupermarketsChainException(EngineConstants.InvalidInputMessage);
         }
 
         private void InvokeCommand(string command, string[] arguments)

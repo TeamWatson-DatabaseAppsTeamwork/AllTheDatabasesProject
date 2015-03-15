@@ -44,8 +44,6 @@
             TextWriter textWriter = new StreamWriter(filePath); //changed filepath
             serializer.Serialize(textWriter, salesAggregated);
             textWriter.Close();
-
-            Console.WriteLine("work done - check temp folder on c: ;)");
         }
 
         public void SetDefaultFileFolder(string fileFolderPath)

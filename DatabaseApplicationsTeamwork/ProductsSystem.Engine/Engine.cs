@@ -91,8 +91,11 @@
                 case EngineConstants.ExportXmlFile:
                     commandType = typeof(ExportXmlFileCommand);
                     break;
+                case EngineConstants.ExportJsonFile:
+                    commandType = typeof(ExportJsonFileCommand);
+                    break;
                 case EngineConstants.ImportXmlFile:
-                    commandType = typeof (ImportXmlFileCommand);
+                    commandType = typeof(ImportXmlFileCommand);
                     break;
                 default:
                     throw new SupermarketsChainException(EngineConstants.InvalidCommandMessage);

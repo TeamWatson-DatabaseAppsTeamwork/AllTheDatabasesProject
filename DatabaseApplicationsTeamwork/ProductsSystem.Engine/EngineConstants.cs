@@ -9,6 +9,7 @@
         // Commands
         public const string ExportPdfFile = "export-pdf";
         public const string ExportXmlFile = "export-xml";
+        public const string ExportJsonFile = "export-json";
         public const string ImportXmlFile = "import-xml";
         public const string Exit = "exit";
 
@@ -37,6 +38,9 @@
 
         public const string XmlReportSuccessfullyExportedMessage =
             "XML report successfully exported.";
+
+        public const string JsonReportSuccessfullyExportedMessage =
+            "JSON report successfully exported.";
 
         public const string XmlReportSuccessfullyImportedMessage =
             "XML report successfully imported.";

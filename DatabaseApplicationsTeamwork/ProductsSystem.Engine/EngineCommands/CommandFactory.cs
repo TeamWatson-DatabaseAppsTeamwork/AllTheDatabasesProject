@@ -2,6 +2,8 @@
 {
     using System;
 
+    using JsonExporter.JsonAggregatedSalesExporter;
+
     using PdfExporter.PdfAggregatedSalesExporter;
     using XmlExporter.XmlAggregatedSalesExporter;
     using XmlImporter;
@@ -17,6 +19,10 @@
             else if (type == typeof(ExportXmlFileCommand))
             {
                 return CreateExportXmlFileCommand();
+            }
+            else if (type == typeof(ExportJsonFileCommand))
+            {
+                return CreateExportJsonFileCommand();
             }
             //else if (type == typeof(ImportXmlFileCommand))
             //{
@@ -36,6 +42,13 @@
             var xmlExporter = new XmlSalesExporter();
             var exportXmlFileCommand = new ExportXmlFileCommand(xmlExporter);
             return exportXmlFileCommand;
+        }
+
+        private static ExportJsonFileCommand CreateExportJsonFileCommand()
+        {
+            var jsonExporter = new JsonSalesExporter();
+            var exportJsonFileCommand = new ExportJsonFileCommand(jsonExporter);
+            return exportJsonFileCommand;
         }
 
         private static ImportXmlFileCommand CreateImportXmlFileCommand()

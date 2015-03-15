@@ -14,7 +14,7 @@
 
         // Messages
             // Error messages
-        public const string MissingCommandArgumentsMessage =
+        public const string CommandArgumentsMissmatchMessage =
             "Arguments count do not match the count needed for the command execution";
 
         public const string InvalidInputFormatMessage =
@@ -27,6 +27,8 @@
 
         public const string NoResultDataMessage = "No data found to be exported. Please try again.";
 
+        public const string FileNotFoundMessage = "File needed is not found";
+
         public const string InvaliDateRangeMessage = "The date range is invalid. Please try again.";
 
             // Success messages
@@ -35,5 +37,8 @@
 
         public const string XmlReportSuccessfullyExportedMessage =
             "XML report successfully exported.";
+
+        public const string XmlReportSuccessfullyImportedMessage =
+            "XML report successfully imported.";
     }
 }

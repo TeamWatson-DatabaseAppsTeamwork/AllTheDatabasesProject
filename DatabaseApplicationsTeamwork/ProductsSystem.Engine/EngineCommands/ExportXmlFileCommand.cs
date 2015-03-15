@@ -56,7 +56,7 @@
                 return commandOutput;
             }
 
-            throw new SupermarketsChainException(EngineConstants.MissingCommandArgumentsMessage);
+            throw new SupermarketsChainException(EngineConstants.CommandArgumentsMissmatchMessage);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@
 
         public void Export()
         {
-            var filePath = this.FileFolderPath + "\\" + this.FileName;
+            var filePath = this.FileFolderPath + Path.DirectorySeparatorChar + this.FileName;
             var pdfDocument = new Document(PageSize.A4);
             var output = new FileStream(filePath, FileMode.Create);
             var pdfWriter = PdfWriter.GetInstance(pdfDocument, output);

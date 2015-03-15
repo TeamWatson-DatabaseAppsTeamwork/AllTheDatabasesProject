@@ -1,11 +1,9 @@
 ﻿namespace XmlImporter
 {
+    using ProductsSystem.Data.Data;
+
     public interface IXmlImporter
     {
-        void Import();
-
-        void SetDefaultFileFolder(string fileFolderPath);
-
-        void SetFileName(string fileName);
+        void Import(IProductsSystemData data);
     }
 }

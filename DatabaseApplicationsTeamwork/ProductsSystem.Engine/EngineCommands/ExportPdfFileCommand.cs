@@ -81,7 +81,7 @@
             }
             else
             {
-                throw new SupermarketsChainException(EngineConstants.MissingCommandArgumentsMessage);
+                throw new SupermarketsChainException(EngineConstants.CommandArgumentsMissmatchMessage);
             }
         }
 

@@ -1,21 +1,17 @@
 ﻿namespace XmlImporter
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class XmlExpensesImporter : IXmlImporter
     {
-        public void Import()
-        {
-            throw new System.NotImplementedException();
-        }
+        public IDictionary<string, IList<KeyValuePair<DateTime, decimal>>>
+            DataToBeImported { get; set; }
 
-
-        public void SetDefaultFileFolder(string fileFolderPath)
+        public void Import(ProductsSystem.Data.Data.IProductsSystemData data)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void SetFileName(string fileName)
-        {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

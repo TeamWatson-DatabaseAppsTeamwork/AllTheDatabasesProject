@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Xml;
@@ -46,7 +47,6 @@
 
         private IDictionary<string, IList<KeyValuePair<DateTime, decimal>>> LoadDataToBeImported()
         {
-            var data = new Dictionary<string, IList<KeyValuePair<DateTime, decimal>>>();
             var xmlReport = new XmlDocument();
             var reportPath = DefaultReportsDirectory + Path.DirectorySeparatorChar + this.Arguments[0];
             try
@@ -57,17 +57,35 @@
             {
                 throw new SupermarketsChainException(EngineConstants.FileNotFoundMessage);
             }
-            
+
+            var data = this.RetrieveData(xmlReport);
+
+            return data;
+        }
+
+        private IDictionary<string, IList<KeyValuePair<DateTime, decimal>>> RetrieveData(XmlDocument xmlReport)
+        {
+            var data = new Dictionary<string, IList<KeyValuePair<DateTime, decimal>>>();
             var vendors = xmlReport.SelectNodes("/expenses-by-month/vendor");
             foreach (XmlElement vendor in vendors)
             {
-                Console.WriteLine(vendor.GetAttribute("name"));
+                var vendorName = vendor.GetAttribute("name");
+                data[vendorName] = new List<KeyValuePair<DateTime, decimal>>();
                 var expenses = vendor.SelectNodes("expenses");
                 foreach (XmlElement expense in expenses)
                 {
-                    Console.WriteLine(expense.InnerText);
+                    data[vendorName]
+                        .Add
+                        (
+                            new KeyValuePair<DateTime, decimal>
+                            (
+                                DateTime.ParseExact(expense.GetAttribute("month"), "MMM-yyyy", CultureInfo.InvariantCulture),
+                                Decimal.Parse(expense.InnerText)
+                            )
+                        );
                 }
             }
+
             return data;
         }
     }

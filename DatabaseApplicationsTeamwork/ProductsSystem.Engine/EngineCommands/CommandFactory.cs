@@ -3,8 +3,8 @@
     using System;
 
     using PdfExporter.PdfAggregatedSalesExporter;
-
     using XmlExporter.XmlAggregatedSalesExporter;
+    using XmlImporter;
 
     public static class CommandFactory
     {
@@ -14,9 +14,13 @@
             {
                 return CreateExportPdfFileCommand();
             }
-            //else if (type == typeof(ExportXmlFileCommand))
-            //{
+            else if (type == typeof(ExportXmlFileCommand))
+            {
                 return CreateExportXmlFileCommand();
+            }
+            //else if (type == typeof(ImportXmlFileCommand))
+            //{
+                return CreateImportXmlFileCommand();
             //}
         }
 
@@ -32,6 +36,13 @@
             var xmlExporter = new XmlSalesExporter();
             var exportXmlFileCommand = new ExportXmlFileCommand(xmlExporter);
             return exportXmlFileCommand;
+        }
+
+        private static ImportXmlFileCommand CreateImportXmlFileCommand()
+        {
+            var xmlImporter = new XmlExpensesImporter();
+            var importXmlFileCommand = new ImportXmlFileCommand(xmlImporter);
+            return importXmlFileCommand;
         }
     }
 }

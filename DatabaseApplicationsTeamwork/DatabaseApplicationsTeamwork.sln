@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Models", "ProductsSystem.Models\ProductsSystem.Models.csproj", "{CD978BBD-0BA1-4981-9725-70BC96809BF9}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlExporter", "XmlExporter\XmlExporter.csproj", "{76703738-8F45-4FD6-8E6D-DBDE067D1E8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.DataTransferObjects", "ProductsSystem.DataTransferObjects\ProductsSystem.DataTransferObjects.csproj", "{62105E42-1404-4504-91A3-F7A0C6F94758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlImporter", "XmlImporter\XmlImporter.csproj", "{564602BB-C97D-4B17-BAB8-4BAC03B90C01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{62105E42-1404-4504-91A3-F7A0C6F94758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62105E42-1404-4504-91A3-F7A0C6F94758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62105E42-1404-4504-91A3-F7A0C6F94758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564602BB-C97D-4B17-BAB8-4BAC03B90C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564602BB-C97D-4B17-BAB8-4BAC03B90C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564602BB-C97D-4B17-BAB8-4BAC03B90C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564602BB-C97D-4B17-BAB8-4BAC03B90C01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

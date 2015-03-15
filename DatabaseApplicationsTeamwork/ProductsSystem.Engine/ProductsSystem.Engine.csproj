@@ -45,6 +45,7 @@
     <Compile Include="EngineCommands\ExportPdfFileCommand.cs" />
     <Compile Include="EngineCommands\ExportXmlFileCommand.cs" />
     <Compile Include="EngineCommands\IEngineCommand.cs" />
+    <Compile Include="EngineCommands\ImportXmlFileCommand.cs" />
     <Compile Include="UserInterface\ConsoleUserInterface.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="EngineConstants.cs" />
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\XmlExporter\XmlExporter.csproj">
       <Project>{9ae6191b-2e5f-4f79-819c-9cf9ea381b0b}</Project>
       <Name>XmlExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XmlImporter\XmlImporter.csproj">
+      <Project>{564602bb-c97d-4b17-bab8-4bac03b90c01}</Project>
+      <Name>XmlImporter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

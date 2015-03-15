@@ -9,6 +9,7 @@
         // Commands
         public const string ExportPdfFile = "export-pdf";
         public const string ExportXmlFile = "export-xml";
+        public const string ImportXmlFile = "import-xml";
         public const string Exit = "exit";
 
         // Messages

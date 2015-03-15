@@ -1,6 +1,7 @@
 ﻿namespace ProductsSystem.Engine
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using ProductsSystem.Data.Data;
@@ -90,6 +91,9 @@
                     break;
                 case EngineConstants.ExportXmlFile:
                     commandType = typeof(ExportXmlFileCommand);
+                    break;
+                case EngineConstants.ImportXmlFile:
+                    commandType = typeof (ImportXmlFileCommand);
                     break;
                 default:
                     throw new SupermarketsChainException(EngineConstants.InvalidCommandMessage);

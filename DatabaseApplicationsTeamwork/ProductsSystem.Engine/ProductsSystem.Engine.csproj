@@ -58,6 +58,10 @@
       <Project>{420122ab-1c38-4d4a-aa8d-b57128f773ed}</Project>
       <Name>PDFExporter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductsSystem.DataTransferObjects\ProductsSystem.DataTransferObjects.csproj">
+      <Project>{62105e42-1404-4504-91a3-f7a0c6f94758}</Project>
+      <Name>ProductsSystem.DataTransferObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProductsSystem.Data\ProductsSystem.Data.csproj">
       <Project>{3e8104b2-eab1-4dab-bc30-e0757e5f3076}</Project>
       <Name>ProductsSystem.Data</Name>

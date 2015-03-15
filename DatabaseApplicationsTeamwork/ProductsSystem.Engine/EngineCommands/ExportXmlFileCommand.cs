@@ -6,14 +6,9 @@
     using System.Globalization;
     using System.Linq;
 
-    using PdfExporter.PdfAggregatedSalesExporter;
-
-    using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
-    using ProductsSystem.Data.Repositories;
     using ProductsSystem.DataTransferObjects;
     using ProductsSystem.Engine.CustomExceptions;
-    using ProductsSystem.Models;
 
     using XmlExporter.XmlAggregatedSalesExporter;
 

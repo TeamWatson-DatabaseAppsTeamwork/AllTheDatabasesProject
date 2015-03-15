@@ -1,12 +1,9 @@
 ﻿namespace ProductsSystem.Client
 {
-    using System;
     using System.Globalization;
-    using System.Linq;
     using System.Threading;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
-    using ProductsSystem.Data.Migrations;
     using ProductsSystem.Engine;
     using ProductsSystem.Engine.UserInterface;
 
@@ -22,7 +19,7 @@
             // Firstly ensure that in the App.config file
             // you have the name of your sql server in the
             // connection string
-            // Configuration.InitializeDatabase(context);
+            //Configuration.InitializeDatabase(context);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var data = ProductsSystemData.GetInstance(context);
             var userInterface = new ConsoleUserInterface();

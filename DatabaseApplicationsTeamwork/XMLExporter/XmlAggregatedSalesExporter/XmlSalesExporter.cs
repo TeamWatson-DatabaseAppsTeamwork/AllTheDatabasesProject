@@ -4,15 +4,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Xml.Serialization;
 
-    using PdfExporter.PdfAggregatedSalesExporter;
-
-    using ProductsSystem.Data.Contexts;
-    using ProductsSystem.Data.Repositories;
     using ProductsSystem.DataTransferObjects;
-    using ProductsSystem.Models;
 
     public class XmlSalesExporter : IXmlExporter
     {
@@ -21,13 +15,6 @@
         private readonly string defaultFileFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         private IList<SalesAggregated> data;
-
-        public XmlSalesExporter(IList<SalesAggregated> aggregatedSalesData)
-        {
-            this.FileFolderPath = this.defaultFileFolderPath;
-            this.FileName = DefaultFileName;
-            this.Data = aggregatedSalesData;
-        }
 
         public XmlSalesExporter()
         {
@@ -52,17 +39,6 @@
         public void Export(IList<SalesAggregated> salesAggregated)
         {
             var filePath = this.FileFolderPath + "\\" + this.FileName;
-
-            //var context = new ProductsSystemDbContext();
-
-            //Repository<Sale> sales = new Repository<ProductsSystem.Models.Sale>(context);
-            //var salesAggregated = sales.All()
-            //    .GroupBy(s => s.Product.Vendor)
-            //    .Select(sgv => new SalesAggregated
-            //    {
-            //        VendorName = sgv.Key.Name,
-            //        RawSummaries = sgv.GroupBy(s => s.Date).Select(sgd => new SalesSummary { Date = sgd.Key, TotalSum = sgd.Sum(s => s.Product.Price * s.Quantity) })
-            //    }).ToList();
 
             var serializer = new XmlSerializer(typeof(List<SalesAggregated>));
             TextWriter textWriter = new StreamWriter(filePath); //changed filepath

@@ -1,0 +1,7 @@
+mongoimport  --db products-system --collection sales-by-product --file C:\Users\Yana\Desktop\1.json
+
+mongoimport --collection sales-by-product --file C:\Users\Yana\Desktop\1.json
+
+1/start "service" in 1st cmd - mongod
+2/2nd cmd - create collection in db
+3/ 3rd cmd - list collection

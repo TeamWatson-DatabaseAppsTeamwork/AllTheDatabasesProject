@@ -27,6 +27,7 @@ namespace ProductsSystem.Data.Migrations
             this.AddProducts(context);
             this.AddSupermarkets(context);
             this.AddSales(context);
+            this.AddPrices(context);
         }
 
         private void AddVendors(ProductsSystemDbContext db)
@@ -179,6 +180,64 @@ namespace ProductsSystem.Data.Migrations
                 });
 
             db.SaveChanges();
+        }
+
+        private void AddPrices(ProductsSystemDbContext context)
+        {
+            context.Prices.AddOrUpdate
+            (
+                new Price
+                {
+                    
+                    ProductId = 1,
+                    SupermarketId = 1,
+                    PriceValue = 0.92m
+                },
+                new Price
+                {
+
+                    ProductId = 1,
+                    SupermarketId = 2,
+                    PriceValue = 1m
+                },
+                new Price
+                {
+                    
+                    ProductId = 2,
+                    SupermarketId = 2,
+                    PriceValue = 8.50m
+                },
+                new Price
+                {
+
+                    ProductId = 2,
+                    SupermarketId = 3,
+                    PriceValue = 7.80m
+                },
+                new Price
+                {
+                    
+                    ProductId = 3,
+                    SupermarketId = 1,
+                    PriceValue = 1.20m
+                },
+                new Price
+                {
+
+                    ProductId = 4,
+                    SupermarketId = 1,
+                    PriceValue = 2.90m
+                },
+                new Price
+                {
+
+                    ProductId = 4,
+                    SupermarketId = 3,
+                    PriceValue = 2.85m
+                }
+            );
+
+            context.SaveChanges();
         }
     }
 }

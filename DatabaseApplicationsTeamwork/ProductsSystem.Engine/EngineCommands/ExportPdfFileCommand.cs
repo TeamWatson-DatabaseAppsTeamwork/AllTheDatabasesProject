@@ -107,7 +107,7 @@
                             {
                                 Product = sale.Product.Name,
                                 Quantity = sale.Quantity + " " + sale.Product.Measure.Name,
-                                UnitPrice = sale.Product.Price,
+                                UnitPrice = sale.Product.Prices.First(p => p.SupermarketId == sale.SupermarketId).PriceValue,
                                 Location = sale.Supermarket.Location,
                                 Sum = sale.Quantity * sale.Product.Price
                             }).ToList(),

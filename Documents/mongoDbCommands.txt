@@ -1,7 +1,26 @@
-mongoimport  --db products-system --collection sales-by-product --file C:\Users\Yana\Desktop\1.json
-
-mongoimport --collection sales-by-product --file C:\Users\Yana\Desktop\1.json
-
 1/start "service" in 1st cmd - mongod
-2/2nd cmd - create collection in db
-3/ 3rd cmd - list collection
+
+2/2nd cmd - create collection in db (NO mongo command, just mongoimport!!!!)
+	mongoimport  --db productsSystem --collection salesByProduct --file C:\Users\Yana\Desktop\1.json
+	mongoimport --db testMe --collection testMeCol --type json --file c:\seed.json --jsonArray
+	
+3/ 3rd cmd - list collection (mongo)
+> mongo 
+MongoDB shell version: 2.4.8 
+connecting to: test 
+
+> show dbs 
+local   0.078125GB 
+mydb    0.453125GB 
+
+> use mydb 
+switched to db mydb 
+
+> show collections 
+docs 
+system.indexes 
+
+> db.docs.find() 
+{ "_id" : ObjectId("528b7c7b594d11167ecdd1a7"), "leaf_num" : "0" } 
+{ "_id" : ObjectId("528b7c7b594d11167ecdd1a8"), "leaf_num" : "1" } 
+{ "_id" : ObjectId("528b7c7b594d11167ecdd1a9"), "leaf_num" : "2" } 

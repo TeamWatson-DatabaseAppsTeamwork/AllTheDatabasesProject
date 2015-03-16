@@ -24,5 +24,7 @@
         public virtual Measure Measure { get; set; }
 
         public virtual ICollection<Sale> Sales { get; set; }
+
+        public virtual ICollection<Price> Prices { get; set; } 
     }
 }

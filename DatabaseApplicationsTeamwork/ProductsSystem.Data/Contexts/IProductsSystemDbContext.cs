@@ -14,7 +14,9 @@
 
         IDbSet<Supermarket> Supermarkets { get; }
 
-        IDbSet<Sale> Sales { get; } 
+        IDbSet<Sale> Sales { get; }
+
+        IDbSet<Price> Prices { get; }
 
         int SaveChanges();
 

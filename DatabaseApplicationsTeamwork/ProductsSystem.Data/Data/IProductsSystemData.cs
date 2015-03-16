@@ -15,7 +15,9 @@
 
         IRepository<Sale> Sales { get; }
 
-        IRepository<Expense> Expenses { get; } 
+        IRepository<Expense> Expenses { get; }
+
+        IRepository<Price> Prices { get; } 
 
         int SaveChanges();
     }

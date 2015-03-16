@@ -46,6 +46,11 @@
         public IRepository<Expense> Expenses
         {
             get { return this.GetRepository<Expense>(); }
+        }
+
+        public IRepository<Price> Prices
+        {
+            get { return this.GetRepository<Price>(); }
         } 
 
         public static ProductsSystemData GetInstance(IProductsSystemDbContext context)

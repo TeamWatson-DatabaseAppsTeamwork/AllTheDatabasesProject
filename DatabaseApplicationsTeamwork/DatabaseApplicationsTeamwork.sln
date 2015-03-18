@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsSystem.Models", "ProductsSystem.Models\ProductsSystem.Models.csproj", "{CD978BBD-0BA1-4981-9725-70BC96809BF9}"
 EndProject
@@ -31,6 +31,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlImporter", "XmlImporter\XmlImporter.csproj", "{564602BB-C97D-4B17-BAB8-4BAC03B90C01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMongoScriptsClass", "TestMongoScriptsClass\TestMongoScriptsClass.csproj", "{12AF9159-A4F4-46F7-8271-B20B93F6F4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleImporterForSqlServer", "OracleImporterForSqlServer\OracleImporterForSqlServer.csproj", "{77C02C19-3C46-4AD6-99BD-77B779727498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMySqlConnection", "TestMySqlConnection\TestMySqlConnection.csproj", "{D025165D-9370-496E-BDDB-9BCE44F5B06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +86,14 @@ Global
 		{12AF9159-A4F4-46F7-8271-B20B93F6F4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12AF9159-A4F4-46F7-8271-B20B93F6F4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12AF9159-A4F4-46F7-8271-B20B93F6F4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C02C19-3C46-4AD6-99BD-77B779727498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C02C19-3C46-4AD6-99BD-77B779727498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C02C19-3C46-4AD6-99BD-77B779727498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C02C19-3C46-4AD6-99BD-77B779727498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D025165D-9370-496E-BDDB-9BCE44F5B06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D025165D-9370-496E-BDDB-9BCE44F5B06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D025165D-9370-496E-BDDB-9BCE44F5B06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D025165D-9370-496E-BDDB-9BCE44F5B06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

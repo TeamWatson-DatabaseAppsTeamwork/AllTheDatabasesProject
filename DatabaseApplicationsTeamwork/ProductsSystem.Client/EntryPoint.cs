@@ -20,7 +20,7 @@
     {
         public static void Main(string[] args)
         {
-            var context = new ProductsSystemDbContext();
+            var context = new ProductsSystemDbContext("ProductsSystem");
 
             // Execute the following method if do not have the
             // database in sql server

@@ -1,0 +1,34 @@
+1/ Install some stuff
+-... look at the bottom (after 3/)
+
+2/ Export objects from SQL Server
+- fill some collections
+
+3/ Import objects to MySQL Server
+- create DB via MySQL Management Studio
+- code first EF for MySQL Server (ADO.Net)??
+
+
+
+To start using Entity Framework 6 and Visual Studio 2013
+is necessary to install MySQL for Visual Studio 1.1.1 Beta and
+MySQL Connector/Net 6.8.1 Beta 
+
+MySQL for Visual Studio 1.1.1 Beta can be downloaded with the following link: 
+https://cdn.mysql.com/Downloads/MySQLInstaller/mysql-visualstudio-plugin-1.1.1.msi 
+
+MySQL Connector/Net 6.8.1 Beta 
+http://dev.mysql.com/downloads/connector/net/ 
+
+
+To start working with VS 2013 and EF 6 
+
+1-	Install the MySQL for Visual Studio 1.1.1 
+2-	Install the Connector/Net 6.8.1 product. 
+3-	To work with Database first please do the following 
+a.	Add the reference for the new assembly called MySql.Data.Entity.EF6 and copy it to the bin forlder of your application. 
+b.	Add the provider to your app/web config file on the providers for Entity Framework section with the following line: 
+<provider invariantName="MySql.Data.MySqlClient" type="MySql.Data.MySqlClient.MySqlProviderServices, MySql.Data.Entity.EF6"></provider> 
+c.	Before you run the Wizard compile your application so the new changes are applied. 
+
+http://lvasquez.github.io/2014/11/18/EntityFramework-MySql/

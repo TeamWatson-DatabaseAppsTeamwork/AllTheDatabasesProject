@@ -16,6 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Database creation
+--
+DROP DATABASE IF EXISTS products_system;
+CREATE DATABASE products_system;
+USE products_system;
+
+--
 -- Table structure for table `expenses`
 --
 

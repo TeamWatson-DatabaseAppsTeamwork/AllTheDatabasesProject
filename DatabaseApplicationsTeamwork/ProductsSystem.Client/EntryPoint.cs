@@ -22,6 +22,11 @@
         {
             var context = new ProductsSystemDbContext("ProductsSystem");
 
+            // Test retrive data from mysql
+            var db = new ProductsSystemDbContext("ProductsSystemMySql");
+            var measures = db.Measures.ToList().First();
+            Console.WriteLine(measures.Name);
+
             // Execute the following method if do not have the
             // database in sql server
             // It will add sample data automatically

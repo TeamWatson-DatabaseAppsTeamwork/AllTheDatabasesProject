@@ -18,9 +18,9 @@
 --
 -- Database creation
 --
-DROP DATABASE IF EXISTS products_system;
-CREATE DATABASE products_system;
-USE products_system;
+DROP DATABASE IF EXISTS productssystem;
+CREATE DATABASE productssystem;
+USE productssystem;
 
 --
 -- Table structure for table `expenses`

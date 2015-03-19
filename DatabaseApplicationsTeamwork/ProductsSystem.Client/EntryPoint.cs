@@ -20,10 +20,10 @@
     {
         public static void Main(string[] args)
         {
-            var context = new ProductsSystemDbContext("ProductsSystem");
+            var context = new ProductsSystemDbContext();
 
             // Test retrive data from mysql
-            var db = new ProductsSystemDbContext("ProductsSystemMySql");
+            var db = new ProductsSystemDbContextForMySql();
             var measures = db.Measures.ToList().First();
             Console.WriteLine(measures.Name);
 
@@ -33,7 +33,7 @@
             // Firstly ensure that in the App.config file
             // you have the name of your sql server in the
             // connection string
-            //Configuration.InitializeDatabase(context);
+            // Configuration.InitializeDatabase(context);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var data = ProductsSystemData.GetInstance(context);
             var userInterface = new ConsoleUserInterface();

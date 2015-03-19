@@ -6,11 +6,7 @@
     public class ProductsSystemDbContext : DbContext, IProductsSystemDbContext
     {
         public ProductsSystemDbContext()
-        {  
-        }
-
-        public ProductsSystemDbContext(string connectionStringName)
-            : base(connectionStringName)
+            : base("ProductsSystem")
         { 
         }
 

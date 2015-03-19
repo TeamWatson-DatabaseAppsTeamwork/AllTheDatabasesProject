@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\IProductsSystemDbContext.cs" />
+    <Compile Include="Contexts\ProductsSystemDbContextForMySql.cs" />
     <Compile Include="Data\IProductsSystemData.cs" />
     <Compile Include="Data\ProductsSystemData.cs" />
     <Compile Include="Migrations\Configuration.cs" />

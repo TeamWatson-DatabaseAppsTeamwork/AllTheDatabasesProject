@@ -45,5 +45,8 @@
 
         public const string XmlReportSuccessfullyImportedMessage =
             "XML report successfully imported.";
+
+        public const string OracleDataSuccessfullyImported =
+            "Oracle data for products successfully imported into SQL Server";
     }
 }

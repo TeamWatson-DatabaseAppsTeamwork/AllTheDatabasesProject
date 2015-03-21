@@ -1,8 +1,10 @@
 ﻿namespace ProductsSystem.Data.Repositories
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Linq.Expressions;
     using ProductsSystem.Data.Contexts;
@@ -39,6 +41,14 @@
         {
             this.ChangeState(entity, EntityState.Added);
             return entity;
+        }
+
+        public void AddRange<TEntity>(IList<TEntity> entities) where TEntity : class
+        {
+            foreach (TEntity entity in entities)
+            {
+                this.Context.Set<TEntity>().Add(entity);
+            }
         }
 
         public T Update(T entity)

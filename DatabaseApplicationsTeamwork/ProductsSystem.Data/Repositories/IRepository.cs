@@ -1,6 +1,8 @@
 ﻿namespace ProductsSystem.Data.Repositories
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -13,6 +15,8 @@
         T GetById(object id);
 
         T Add(T entity);
+
+        void AddRange<TEntity>(IList<TEntity> entities) where TEntity : class;
 
         T Update(T entity);
 

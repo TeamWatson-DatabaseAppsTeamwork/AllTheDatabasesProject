@@ -9,7 +9,7 @@
     {
         static void Main(string[] args)
         {
-            var db = new ProductsSystemDbContext("MySql");
+            var db = new ProductsSystemDbContext();
             var measures = db.Measures.ToList().First();
             Console.WriteLine(measures.Name);
         }

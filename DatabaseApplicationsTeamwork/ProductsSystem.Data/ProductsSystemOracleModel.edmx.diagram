@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8652fa499a140a197bd1dc9f13a13f8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Expenses" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MEASURES" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRICES" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRODUCTS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SUPERMARKETS" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VENDORS" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_PRODUCTS_MEASURES_MEASUREID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRICES_PRODUCTS_PRODUCTID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRICES_SUPERMARKETS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUCTS_VENDORS_VENDORID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

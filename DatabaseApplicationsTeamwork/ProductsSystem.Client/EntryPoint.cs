@@ -8,7 +8,7 @@
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
-
+    using ProductsSystem.Data;
     using ProductsSystem.Data.Contexts;
     using ProductsSystem.Data.Data;
     using ProductsSystem.Data.Migrations;
@@ -26,6 +26,11 @@
             var db = new ProductsSystemDbContextForMySql();
             var measures = db.Measures.ToList().First();
             Console.WriteLine(measures.Name);
+
+            // Test retrive data from oracle
+            var dbOracle = new ProductsSystemOracleEntities();
+            var measureOracle = dbOracle.MEASURES.ToList().First();
+            Console.WriteLine(measureOracle.NAME);
 
             // Execute the following method if do not have the
             // database in sql server

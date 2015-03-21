@@ -5,6 +5,12 @@
 
     public class Product
     {
+        public Product()
+        {
+            this.Prices = new HashSet<Price>();
+            this.Sales = new HashSet<Sale>();
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

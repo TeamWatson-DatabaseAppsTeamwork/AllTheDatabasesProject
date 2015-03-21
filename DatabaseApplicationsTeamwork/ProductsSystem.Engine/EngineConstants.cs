@@ -11,6 +11,7 @@
         public const string ExportXmlFile = "export-xml";
         public const string ExportJsonFile = "export-json";
         public const string ImportXmlFile = "import-xml";
+        public const string ImportOracleDataToSqlServer = "import-oracle-data";
         public const string Exit = "exit";
 
         // Messages

@@ -5,8 +5,10 @@
     using JsonExporter.JsonAggregatedSalesExporter;
 
     using PdfExporter.PdfAggregatedSalesExporter;
+    using ProductsSystem.Data;
     using XmlExporter.XmlAggregatedSalesExporter;
     using XmlImporter;
+    using OracleImporterForSqlServer;
 
     public static class CommandFactory
     {
@@ -24,9 +26,13 @@
             {
                 return CreateExportJsonFileCommand();
             }
-            //else if (type == typeof(ImportXmlFileCommand))
-            //{
+            else if (type == typeof(ImportXmlFileCommand))
+            {
                 return CreateImportXmlFileCommand();
+            }
+            //else if (type == typeof(ImportOracleDataCommand))
+            //{
+                return CreateImportOracleDataCommand();
             //}
         }
 
@@ -56,6 +62,14 @@
             var xmlImporter = new XmlExpensesImporter();
             var importXmlFileCommand = new ImportXmlFileCommand(xmlImporter);
             return importXmlFileCommand;
+        }
+
+        private static ImportOracleDataCommand CreateImportOracleDataCommand()
+        {
+            var oracleDataImporter = new OracleImporterForSqlServer();
+            var oracleDbContext = new ProductsSystemOracleEntities();
+            var importOracleDataCommand = new ImportOracleDataCommand(oracleDbContext, oracleDataImporter);
+            return importOracleDataCommand;
         }
     }
 }

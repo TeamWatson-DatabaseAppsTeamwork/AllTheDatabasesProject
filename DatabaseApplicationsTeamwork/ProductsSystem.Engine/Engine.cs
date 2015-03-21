@@ -97,6 +97,9 @@
                 case EngineConstants.ImportXmlFile:
                     commandType = typeof(ImportXmlFileCommand);
                     break;
+                case EngineConstants.ImportOracleDataToSqlServer:
+                    commandType = typeof(ImportOracleDataCommand);
+                    break;
                 default:
                     throw new SupermarketsChainException(EngineConstants.InvalidCommandMessage);
             }

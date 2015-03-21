@@ -9,6 +9,7 @@
     using XmlExporter.XmlAggregatedSalesExporter;
     using XmlImporter;
     using OracleImporterForSqlServer;
+    using ExcelImporter;
 
     public static class CommandFactory
     {
@@ -30,9 +31,13 @@
             {
                 return CreateImportXmlFileCommand();
             }
-            //else if (type == typeof(ImportOracleDataCommand))
-            //{
+            else if (type == typeof(ImportOracleDataCommand))
+            {
                 return CreateImportOracleDataCommand();
+            }
+            //else if (type == typeof(ImportExcelDataCommand))
+            //{
+                return CreateImportExcelDataCommand();
             //}
         }
 
@@ -70,6 +75,13 @@
             var oracleDbContext = new ProductsSystemOracleEntities();
             var importOracleDataCommand = new ImportOracleDataCommand(oracleDbContext, oracleDataImporter);
             return importOracleDataCommand;
+        }
+
+        private static ImportExcelDataCommand CreateImportExcelDataCommand()
+        {
+            var excelDataImporter = new ExcelImporter();
+            var importExcelDataCommand = new ImportExcelDataCommand(excelDataImporter);
+            return importExcelDataCommand;
         }
     }
 }

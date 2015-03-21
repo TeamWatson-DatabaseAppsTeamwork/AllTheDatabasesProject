@@ -27,11 +27,6 @@
             //var measures = db.Measures.ToList().First();
             //Console.WriteLine(measures.Name);
 
-            // Test retrive data from oracle
-            //var dbOracle = new ProductsSystemOracleEntities();
-            //var measureOracle = dbOracle.MEASURES.ToList().First();
-            //Console.WriteLine(measureOracle.NAME);
-
             // Execute the following method if do not have the
             // database in sql server
             // It will add sample data automatically

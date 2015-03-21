@@ -64,6 +64,7 @@
     <Compile Include="EngineCommands\ExportPdfFileCommand.cs" />
     <Compile Include="EngineCommands\ExportXmlFileCommand.cs" />
     <Compile Include="EngineCommands\IEngineCommand.cs" />
+    <Compile Include="EngineCommands\ImportExcelDataCommand.cs" />
     <Compile Include="EngineCommands\ImportOracleDataCommand.cs" />
     <Compile Include="EngineCommands\ImportXmlFileCommand.cs" />
     <Compile Include="UserInterface\ConsoleUserInterface.cs" />
@@ -74,6 +75,10 @@
     <Compile Include="UserInterface\UserInput.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcelImporter\ExcelImporter.csproj">
+      <Project>{a8229b5d-306b-40d3-965a-2aa603ae977f}</Project>
+      <Name>ExcelImporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JsonExporter\JsonExporter.csproj">
       <Project>{dc9b4204-84a7-4144-8013-18bd09f04ec1}</Project>
       <Name>JsonExporter</Name>

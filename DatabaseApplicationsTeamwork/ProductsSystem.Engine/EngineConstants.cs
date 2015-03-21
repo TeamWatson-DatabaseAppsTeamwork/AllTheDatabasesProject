@@ -12,6 +12,7 @@
         public const string ExportJsonFile = "export-json";
         public const string ImportXmlFile = "import-xml";
         public const string ImportOracleDataToSqlServer = "import-oracle-data";
+        public const string ImportExcelData = "import-excel-data";
         public const string Exit = "exit";
 
         // Messages
@@ -48,5 +49,8 @@
 
         public const string OracleDataSuccessfullyImported =
             "Oracle data for products successfully imported into SQL Server";
+
+        public const string ExcelDataSuccessfullyImported =
+            "Excel data for sales successfully imported";
     }
 }

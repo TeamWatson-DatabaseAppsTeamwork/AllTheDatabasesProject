@@ -15,9 +15,9 @@
     {
         private readonly string DefaultReportsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private const int CommandArgumentsCount = 1;
-        private XmlExpensesImporter xmlImporter;
+        private IXmlImporter xmlImporter;
 
-        public ImportXmlFileCommand(XmlExpensesImporter xmlImporter)
+        public ImportXmlFileCommand(IXmlImporter xmlImporter)
         {
             this.xmlImporter = xmlImporter;
             this.Arguments = new string[CommandArgumentsCount];

@@ -6,6 +6,7 @@
 
     public class ImportExcelDataCommand : IEngineCommand
     {
+        private readonly string DefaultSalesZipDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private IExcelImporter excelImporter;
 
         public ImportExcelDataCommand(IExcelImporter excelImporter)

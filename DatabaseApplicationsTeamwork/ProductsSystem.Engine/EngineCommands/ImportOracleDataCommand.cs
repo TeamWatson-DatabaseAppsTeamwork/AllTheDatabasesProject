@@ -1,6 +1,5 @@
 ﻿namespace ProductsSystem.Engine.EngineCommands
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -25,18 +24,9 @@
 
         public string Execute(IProductsSystemData data)
         {
-            var products = this.oracleDbContext.PRODUCTS.
-                Select
-                (
-                    p => new Product
-                    {
-                        Name = p.NAME,
-                        Vendor = new Vendor{ Name = p.VENDORS.NAME },
-                        Measure = new Measure { Name = p.MEASURES.NAME }
-                    }
-                )
-                .ToList();
-            this.ImportOracleData(data, products);
+            var dataToBeImported = this.LoadOracleData();
+            oracleImporter.DataToBeImported = dataToBeImported;
+            oracleImporter.Import(data);
             return EngineConstants.OracleDataSuccessfullyImported;
         }
 
@@ -45,15 +35,21 @@
             this.Arguments = rawArguments;
         }
 
-        private void ImportOracleData(IProductsSystemData data, List<Product> oracleProdutcs)
+        private List<Product> LoadOracleData()
         {
-            var sqlSereverProductsNames = data.Products.All().Select(p => p.Name);
-            oracleProdutcs.RemoveAll(p => sqlSereverProductsNames.Contains(p.Name));
-            if (oracleProdutcs.Any())
-            {
-                data.Products.AddRange(oracleProdutcs);
-                data.SaveChanges();
-            }
+            var oracleProducts = this.oracleDbContext.PRODUCTS.
+               Select
+               (
+                   p => new Product
+                   {
+                       Name = p.NAME,
+                       VendorId = (int)p.VENDORS.ID,
+                       MeasureId = (int)p.MEASURES.ID
+                   }
+               )
+               .ToList();
+
+            return oracleProducts;
         }
     }
 }

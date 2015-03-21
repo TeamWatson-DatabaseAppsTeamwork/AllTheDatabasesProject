@@ -1,16 +1,15 @@
 ﻿namespace ProductsSystem.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class Sale
     {
-        [Key, Column(Order = 1)]
+        public int Id { get; set; }
+
         [ForeignKey("Supermarket")]
         public int SupermarketId { get; set; }
 
-        [Key, Column(Order = 2)]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
 

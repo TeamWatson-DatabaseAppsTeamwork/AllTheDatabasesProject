@@ -73,28 +73,28 @@ namespace ProductsSystem.Data.Migrations
             db.Products.AddOrUpdate(
                 new Product
                 {
-                    Name = "Beer “Zagorka",
+                    Name = "Beer “Zagorka”",
                     Price = (decimal)0.86,
                     VendorId = 2,
                     MeasureId = 1
                 },
                 new Product
                 {
-                    Name = "Vodka “Targovishte",
+                    Name = "Vodka “Targovishte”",
                     Price = (decimal)7.56,
                     VendorId = 3,
                     MeasureId = 1
                 },
                 new Product
                 {
-                    Name = "Beer \"Beck’s",
+                    Name = "Beer “Beck’s”",
                     Price = (decimal)1.03,
                     VendorId = 2,
                     MeasureId = 1
                 },
                 new Product
                 {
-                    Name = "Chocolate \"Milka\"",
+                    Name = "Chocolate “Milka”",
                     Price = (decimal)2.80,
                     VendorId = 1,
                     MeasureId = 2

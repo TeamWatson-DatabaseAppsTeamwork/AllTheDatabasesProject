@@ -42,6 +42,7 @@
     <Compile Include="ExcelImporter.cs" />
     <Compile Include="IExcelImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorksheetSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductsSystem.Data\ProductsSystem.Data.csproj">

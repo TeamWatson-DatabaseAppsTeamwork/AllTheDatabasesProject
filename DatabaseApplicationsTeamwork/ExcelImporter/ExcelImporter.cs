@@ -10,7 +10,8 @@
 
         public void Import(IProductsSystemData data)
         {
-            // TODO
+            data.Sales.AddRange(this.DataToBeImported);
+            data.SaveChanges();
         }
     }
 }

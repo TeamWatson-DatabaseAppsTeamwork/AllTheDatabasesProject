@@ -45,16 +45,9 @@
         {
             var sales = this.LoadSales(data);
             excelImporter.SalesToBeImported = sales;
-            excelImporter.ImportSales(data);
+            excelImporter.Import(data);
 
-            var prices = this.LoadPrices(data);
-            if (prices.Any())
-            {
-                excelImporter.PricesToBeImported = prices;
-                excelImporter.ImportPrices(data);
-            }
-
-            return "";
+            return EngineConstants.ExcelDataSuccessfullyImported;
         }
 
         public void RecieveArguments(string[] rawArguments)
@@ -91,18 +84,19 @@
                 var supermarketName = worksheet.Cell(WorksheetSettings.StartRow, WorksheetSettings.StartCell).Value;
                 int supermarketId = data.Supermarkets.Find(s => s.Location == supermarketName).Select(s => s.Id).First();
                 string productName;
-                int productId;
+                Product product;
                 int quantity;
                 int currentRow = WorksheetSettings.FirstContentRow;
                 string checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
                 while (checkContent != WorksheetSettings.EndRowContent)
                 {
                     productName = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
-                    productId = data.Products.Find(p => p.Name == productName).Select(p => p.Id).First();
+                    product = data.Products.Find(p => p.Name == productName).First();
+                    this.AddNewPrices(product, supermarketId, worksheet, currentRow);
                     quantity = worksheet.Cell(currentRow, WorksheetSettings.QuantityCell).ValueAsInteger;
                     var sale = new Sale
                     {
-                        ProductId = productId,
+                        Product = product,
                         SupermarketId = supermarketId,
                         Quantity = quantity,
                         Date = date
@@ -117,61 +111,22 @@
             return sales;
         }
 
-        private IList<Price> LoadPrices(IProductsSystemData data)
+        private void AddNewPrices(Product product, int supermarketId, Worksheet worksheet, int currentRow)
         {
-            var salesReportsDirectories = Directory.GetDirectories(DefaultExtractPath);
-            var prices = new List<Price>();
-            foreach (var directory in salesReportsDirectories)
-            {
-                var salesReports = Directory.GetFiles(directory);
-                foreach (var salesReport in salesReports)
-                {
-                    prices.AddRange(this.ExtractPrices(data, salesReport));
-                }
-            }
-
-            return prices;
-        }
-
-        private IList<Price> ExtractPrices(IProductsSystemData data, string file)
-        {
-            IList<Price> prices = new List<Price>();
-            var report = new Spreadsheet();
-            using (report)
-            {
-                report.LoadFromFile(file);
-                Worksheet worksheet = report.Workbook.Worksheets.ByName("Sales");
-                var supermarketName = worksheet.Cell(WorksheetSettings.StartRow, WorksheetSettings.StartCell).Value;
-                int supermarketId = data.Supermarkets.Find(s => s.Location == supermarketName).Select(s => s.Id).First();
-                string productName;
-                Product product;
-                int currentRow = WorksheetSettings.FirstContentRow;
-                string checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
-                while (checkContent != WorksheetSettings.EndRowContent)
-                {
-                    productName = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
-                    product = data.Products.Find(p => p.Name == productName).First();
-                    bool productHasNewPrice =
+            bool productHasNewPrice =
                         !product.Prices.Select(p => p.SupermarketId).Contains(supermarketId);
-                    if (productHasNewPrice)
-                    {
-                        prices.Add
-                            (
-                                new Price
-                                {
-                                    ProductId = product.Id,
-                                    SupermarketId = supermarketId,
-                                    PriceValue = decimal.Parse(worksheet.Cell(currentRow, WorksheetSettings.UnitPriceCell).ValueAsString)
-                                }
-                            );
-                    }
-
-                    currentRow++;
-                    checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
-                }
+            if (productHasNewPrice)
+            {
+                product.Prices.Add
+                    (
+                        new Price
+                        {
+                            ProductId = product.Id,
+                            SupermarketId = supermarketId,
+                            PriceValue = decimal.Parse(worksheet.Cell(currentRow, WorksheetSettings.UnitPriceCell).ValueAsString)
+                        }
+                    );
             }
-
-            return prices;
-        } 
+        }
     }
 }

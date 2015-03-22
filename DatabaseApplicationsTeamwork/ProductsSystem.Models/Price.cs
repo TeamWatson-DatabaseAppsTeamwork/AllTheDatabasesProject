@@ -18,5 +18,20 @@
         public virtual Supermarket Supermarket { set; get; }
 
         public decimal PriceValue { get; set; }
+
+        public override int GetHashCode()
+        {
+            return this.ProductId ^ this.SupermarketId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var priceComparator = obj as Price;
+            bool areEqual =
+                (priceComparator != null) &&
+                (priceComparator.ProductId == this.ProductId) &&
+                (priceComparator.SupermarketId == this.SupermarketId);
+            return areEqual;
+        }
     }
 }

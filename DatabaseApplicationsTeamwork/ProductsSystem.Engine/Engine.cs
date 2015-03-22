@@ -35,6 +35,8 @@
 
         public void Run()
         {
+            this.output = EngineConstants.StartMessage;
+            this.ShowOutputToUser();
             while (true)
             {
                 try

@@ -1,5 +1,7 @@
 ﻿namespace ProductsSystem.Engine
 {
+    using System;
+
     public static class EngineConstants
     {
         // Common constants
@@ -16,6 +18,18 @@
         public const string Exit = "exit";
 
         // Messages
+            // Start message
+        public static readonly string StartMessage =
+            "Commands available" + Environment.NewLine +
+            "  -" + ExportPdfFile + " <start date> <end date>" + Environment.NewLine +
+            "  -" + ExportXmlFile + " <start date> <end date>" + Environment.NewLine +
+            "  -" + ExportJsonFile + " <start date> <end date>" + Environment.NewLine +
+            "  -" + ImportXmlFile + Environment.NewLine +
+            "  -" + ImportOracleDataToSqlServer + Environment.NewLine +
+            "  -" + ImportExcelData + Environment.NewLine +
+            "  -" + Exit + Environment.NewLine +
+            "System is waiting for your command";
+
             // Error messages
         public const string CommandArgumentsMissmatchMessage =
             "Arguments count do not match the count needed for the command execution";

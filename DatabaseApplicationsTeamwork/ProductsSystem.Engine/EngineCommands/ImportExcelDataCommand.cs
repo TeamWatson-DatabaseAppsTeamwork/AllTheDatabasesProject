@@ -28,7 +28,8 @@
                 EndRowContent = "Total sum:",
                 FirstContentRow = 3,
                 ProductCell = 1,
-                QuantityCell = 2
+                QuantityCell = 2,
+                UnitPriceCell = 3
             };
 
         private IExcelImporter excelImporter;
@@ -43,8 +44,16 @@
         public string Execute(IProductsSystemData data)
         {
             var sales = this.LoadSales(data);
-            excelImporter.DataToBeImported = sales;
-            excelImporter.Import(data);
+            excelImporter.SalesToBeImported = sales;
+            excelImporter.ImportSales(data);
+
+            var prices = this.LoadPrices(data);
+            if (prices.Any())
+            {
+                excelImporter.PricesToBeImported = prices;
+                excelImporter.ImportPrices(data);
+            }
+
             return "";
         }
 
@@ -64,14 +73,14 @@
                 var salesReports = Directory.GetFiles(directory);
                 foreach (var salesReport in salesReports)
                 {
-                    sales.AddRange(this.ExtractExcelFileData(salesReport, date, data));
+                    sales.AddRange(this.ExtractSales(salesReport, date, data));
                 }
             }
             
             return sales;
         }
 
-        private IList<Sale> ExtractExcelFileData(string file, DateTime date, IProductsSystemData data)
+        private IList<Sale> ExtractSales(string file, DateTime date, IProductsSystemData data)
         {
             IList<Sale> sales = new List<Sale>();
             var report = new Spreadsheet();
@@ -98,6 +107,7 @@
                         Quantity = quantity,
                         Date = date
                     };
+
                     sales.Add(sale);
                     currentRow++;
                     checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
@@ -106,5 +116,62 @@
 
             return sales;
         }
+
+        private IList<Price> LoadPrices(IProductsSystemData data)
+        {
+            var salesReportsDirectories = Directory.GetDirectories(DefaultExtractPath);
+            var prices = new List<Price>();
+            foreach (var directory in salesReportsDirectories)
+            {
+                var salesReports = Directory.GetFiles(directory);
+                foreach (var salesReport in salesReports)
+                {
+                    prices.AddRange(this.ExtractPrices(data, salesReport));
+                }
+            }
+
+            return prices;
+        }
+
+        private IList<Price> ExtractPrices(IProductsSystemData data, string file)
+        {
+            IList<Price> prices = new List<Price>();
+            var report = new Spreadsheet();
+            using (report)
+            {
+                report.LoadFromFile(file);
+                Worksheet worksheet = report.Workbook.Worksheets.ByName("Sales");
+                var supermarketName = worksheet.Cell(WorksheetSettings.StartRow, WorksheetSettings.StartCell).Value;
+                int supermarketId = data.Supermarkets.Find(s => s.Location == supermarketName).Select(s => s.Id).First();
+                string productName;
+                Product product;
+                int currentRow = WorksheetSettings.FirstContentRow;
+                string checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
+                while (checkContent != WorksheetSettings.EndRowContent)
+                {
+                    productName = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
+                    product = data.Products.Find(p => p.Name == productName).First();
+                    bool productHasNewPrice =
+                        !product.Prices.Select(p => p.SupermarketId).Contains(supermarketId);
+                    if (productHasNewPrice)
+                    {
+                        prices.Add
+                            (
+                                new Price
+                                {
+                                    ProductId = product.Id,
+                                    SupermarketId = supermarketId,
+                                    PriceValue = decimal.Parse(worksheet.Cell(currentRow, WorksheetSettings.UnitPriceCell).ValueAsString)
+                                }
+                            );
+                    }
+
+                    currentRow++;
+                    checkContent = worksheet.Cell(currentRow, WorksheetSettings.ProductCell).ValueAsString;
+                }
+            }
+
+            return prices;
+        } 
     }
 }

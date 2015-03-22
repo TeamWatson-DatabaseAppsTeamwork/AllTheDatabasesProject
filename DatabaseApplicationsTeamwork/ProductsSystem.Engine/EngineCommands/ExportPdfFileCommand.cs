@@ -115,40 +115,6 @@
                     });
             }
 
-        //    var aggregatedSalesData = new List<SalesForDateInterval>
-        //    {
-        //        new SalesForDateInterval
-        //        {
-        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-        //            Sales = new List<object>
-        //            {
-        //                new { Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m },
-        //                new { Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00 }
-        //            },
-        //            TotaSum = 850
-        //        },
-        //        new SalesForDateInterval
-        //        {
-        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-        //            Sales = new List<object>
-        //            {
-        //                new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
-        //                new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
-        //            },
-        //            TotaSum = 850
-        //        },
-        //        new SalesForDateInterval
-        //        {
-        //            Date = DateTime.ParseExact("20-07-2014", EngineConstants.DateFormat, CultureInfo.InvariantCulture),
-        //            Sales = new List<object>
-        //            {
-        //                new {Product = "Beer “Zagorka”", Quantity = "11 liters", UnitPrice = 1.00m, Location = "Supermarket “Bourgas – Plaza”", Sum = 48.00m},
-        //                new {Product = "Beer “Zagorka”", Quantity = "78 liters", UnitPrice = 0.92m, Location = "Supermarket “Kaspichan – Center”", Sum = 37.00}
-        //            },
-        //            TotaSum = 850
-        //        }
-        //    };
-
             return aggregatedSalesData;
         }
     }

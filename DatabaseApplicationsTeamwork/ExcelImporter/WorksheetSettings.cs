@@ -9,5 +9,6 @@
          public int FirstContentRow { get; set; }
          public int ProductCell { get; set; }
          public int QuantityCell { get; set; }
+         public int UnitPriceCell { get; set; }
     }
 }

@@ -6,9 +6,13 @@
 
     public interface IExcelImporter
     {
-        IList<Sale> DataToBeImported { get; set; }
+        IList<Sale> SalesToBeImported { get; set; }
+
+        IList<Price> PricesToBeImported { get; set; } 
  
-        void Import(IProductsSystemData data);
+        void ImportSales(IProductsSystemData data);
+
+        void ImportPrices(IProductsSystemData data);
 
     }
 }

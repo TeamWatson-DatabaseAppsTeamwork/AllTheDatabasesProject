@@ -19,6 +19,21 @@
 
         public virtual Product Product { get; set; }
 
-        public virtual Supermarket Supermarket { get; set; } 
+        public virtual Supermarket Supermarket { get; set; }
+
+        public override int GetHashCode()
+        {
+            return this.ProductId ^ this.SupermarketId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var saleComparator = obj as Sale;
+            bool areEqual =
+                (saleComparator != null) &&
+                (saleComparator.ProductId == this.ProductId) &&
+                (saleComparator.SupermarketId == this.SupermarketId);
+            return areEqual;
+        }
     }
 }

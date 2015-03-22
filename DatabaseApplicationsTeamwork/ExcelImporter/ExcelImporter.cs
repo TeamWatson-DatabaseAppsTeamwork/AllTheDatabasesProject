@@ -6,11 +6,19 @@
 
     public class ExcelImporter : IExcelImporter
     {
-        public IList<Sale> DataToBeImported { get; set; }
+        public IList<Sale> SalesToBeImported { get; set; }
 
-        public void Import(IProductsSystemData data)
+        public IList<Price> PricesToBeImported { get; set; } 
+
+        public void ImportSales(IProductsSystemData data)
         {
-            data.Sales.AddRange(this.DataToBeImported);
+            data.Sales.AddRange(this.SalesToBeImported);
+            data.SaveChanges();
+        }
+
+        public void ImportPrices(IProductsSystemData data)
+        {
+            data.Prices.AddRange(this.PricesToBeImported);
             data.SaveChanges();
         }
     }
